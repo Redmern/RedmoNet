@@ -8,6 +8,9 @@ npm install
 ### Compiles and hot-reloads for development
 ```
 npm run serve
+
+npm config set ignore-scripts false
+
 ```
 
 ### Compiles and minifies for production
@@ -32,3 +35,7 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+### Build dist local
+npm install -g serve (if serve not installed)
+serve -s dist

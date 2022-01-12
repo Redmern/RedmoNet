@@ -1,18 +1,28 @@
 <template>
-    <div class="sidebar" :style="{ width : menubarWidth }">
+    <div class="menubar" :style="{ width : menubarWidth }">
         <h5>
-            <span :class="{'full': !collapsed}" v-if="!collapsed">
-                RedmoNet
-            </span>
+            <transition name="fade" mode="out-in">
+                
+                <span :class="{'full': !collapsed}" v-if="!collapsed">
+                    RedmoNet
+                </span>
+                
+                <span class="abbreviation" v-else>
+                    <div class="abbreviation">R</div>
+                    <div class="abbreviation">M</div>
+                    <div class="abbreviation">N</div>
+                </span>
 
-            <span class="abbreviation" v-else>
-                <div>R</div>
-                <div>M</div>
-                <div>N</div>
-            </span>
+            </transition>
+            
         </h5>
 
-    
+        <div class="links" :class="{'links-full': !collapsed}">
+            <MenuBarLinks description="Overview"  to="/" icon="fas fa-home"/>  
+            <MenuBarLinks description="Add User" to="/about" icon="fas fa-user-plus"/>       
+            <MenuBarLinks description="History" to="/about" icon="fas fa-history"/>     
+        </div>
+
         <div class="Toggler justify-content-center">
             <span 
                 class="collapse-icon" 
@@ -25,12 +35,16 @@
             
     </div>
 </template>
-
+Kan 
 <script lang="ts">
 
 import {mapMutations, mapState} from 'vuex'
+import MenuBarLinks from "./MenuBarLinks.vue"
 
 export default{
+    components: {
+        MenuBarLinks,
+    },
     computed:{
         ...mapState(['menubarWidth']),
         ...mapState(['collapsed'])
@@ -47,9 +61,36 @@ export default{
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 
-.sidebar {
+@import './src/style/main.scss';
+
+.links-full{
+    left: 15% !important;
+}
+
+.links{
+    position: absolute;
+    top: 40%;
+    left:20%;
+    transition: left 0.4s ease;
+}
+
+
+.fade-enter-active,
+.fade-leave-active{
+    transition: opacity 0.1s cubic-bezier(0.455, 0.03, 0.515, 0.955); 
+    // transition: linear 0.5s ease-in-out; 
+}
+
+.fade-enter,
+.fade-leave,
+.fade-leave-to{
+    transition: opacity 0.1s cubic-bezier(0.455, 0.03, 0.515, 0.955); 
+    opacity: 0;
+}
+
+.menubar {
     color: white;
-    background-color: var(--sidebar-bg-color);
+    background-color: var(--sidebar-bg);
     float: left;
     position: fixed;
     z-index: 1;
@@ -61,24 +102,29 @@ export default{
     display: flex;
     flex-direction: column;
     border: 0;
-    border-radius: 0.2rem;
+    border-radius: 0.1rem;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
-    box-shadow: 0.02rem 0.02 0.1rem 0.01rem rgba(0, 0, 0, 0.39) !important;
+    box-shadow: 0.07rem 0.075rem 0.1rem 0.1rem rgba(0, 0, 0, 0.7) !important;
 
-    .h5{
+    @include hover-focus {
+        box-shadow: 0.07rem 0.075rem 0.3rem 0.1rem #F7AEF8 !important;
+    }
+
+    h5{
         text-align: center;
     }
 
-    // .full{
-    //     transform: rotate(45deg);
-    //     transition: 0.4s ease-in-out; 
-    // }
+    .full{
+        font-family: Rooster;
+        font-size: 1.7em;
+    }
 
-    // .abbreviation{
-    //     transform: rotate(-45deg);
-    //     transition: 0.4s ease-out;
-    // }
+    .abbreviation{
+        font-family: Rooster;
+        font-size: 1.2em;
+        transform: rotate(-20deg);
+    }
 
     .rotate-180{
         transform: rotate(90deg);

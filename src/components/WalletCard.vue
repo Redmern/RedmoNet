@@ -19,6 +19,7 @@ import { Options, Vue } from "vue-class-component";
     msg: String,
   },
 })
+
 export default class WalletCard extends Vue {
   msg!: string;
 }
@@ -26,31 +27,27 @@ export default class WalletCard extends Vue {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-@mixin hover-focus {
-    &:hover,
-    &:focus {
-        @content;
-    }
-}
+
+@import './src/style/main.scss';
 
 .card {
     padding: 3px 10px 0 10px;
     text-align: center;
-    background: -webkit-linear-gradient(75deg, #f0e5ce1a, #a9a9ac);
-    background: linear-gradient(75deg, #f0e5ce3a, #a9a9ac);
+    background: -webkit-linear-gradient(75deg, var(--walletcard-bg), var(--walletcard-bg2));
+    background: linear-gradient(75deg, var(--walletcard-bg), var(--walletcard-bg2));
     border: 0;
     border-radius: 0.35rem;
-    box-shadow: 0.07rem 0.075rem 0.1rem 0.1rem rgba(0, 0, 0, 0.15) !important;
+    box-shadow: 0.07rem 0.075rem 0.1rem 0.1rem rgba(0, 0, 0, 0.7) !important;
     transition: box-shadow .3s;
 
     @include hover-focus {
-        box-shadow: 0.07rem 0.075rem 0.3rem 0.1rem rgba(0, 0, 0, 0.25) !important;
+        box-shadow: 0.07rem 0.075rem 0.3rem 0.1rem #F7AEF8 !important;
     }
 
     .card-header {
         border: 0;
         padding: 0;
-        background: inherit;
+        background: none;
         margin-top: 10px;
         margin-bottom: 10px;
     }
@@ -72,64 +69,23 @@ export default class WalletCard extends Vue {
     transition: box-shadow .3s;
     margin-bottom: 5px;
     width: 85%;
-    background: -webkit-linear-gradient(75deg, #ac449bcb, #af4c9f);
-    background: linear-gradient(75deg, #ac449bcb, #af4c9f);
+    background: -webkit-linear-gradient(75deg, var(--walletcard-btn), var(--walletcard-btn2));
+    background: linear-gradient(75deg, var(--walletcard-btn), var(--walletcard-btn2));
     border: none;
 
     @include hover-focus {
         box-shadow: 0.07rem 0.075rem 0.3rem 0.1rem rgba(0, 0, 0, 0.25) !important;
-        background: -webkit-linear-gradient(75deg, #ac449bea, #af4c9f);
-    background: linear-gradient(75deg, #ac449bea, #af4c9f);
+        background: -webkit-linear-gradient(75deg, var(--walletcard-btn-hover), var(--walletcard-btn-hover2));
+        background: linear-gradient(75deg, var(--walletcard-btn-hover), var(--walletcard-btn-hover2));
         svg {
             opacity: 1;
         }
     }
 
-    button {
-        box-shadow: 0.07rem 0.075rem 0.1rem 0.1rem rgba(0, 0, 0, 0.15) !important;
-        transition: box-shadow .3s;
-        background: -webkit-linear-gradient(75deg, #f0e5ce, #a9a9ac);
-        background: linear-gradient(75deg, #f0e5ce, #a9a9ac);
-
-
-        svg {
-            opacity: 0.7;
-            font-size: 1rem;
-            float: right;
-        }
-
-        
-    }
-
-    .food-btn {
-        padding: 2px 6px;
-        font-size: 15px;
-        font-weight: 600;
-        border: 1px solid rgb(145, 145, 145);
-        box-shadow: 0 0 0.125rem 0.05rem rgba(0, 0, 0, 0.075) !important;
-        background: -webkit-linear-gradient(75deg, #f7eedc, #b8b8c5);
-
-        &:hover, &:focus {
-            background: -webkit-linear-gradient(75deg, #f7eedc, #9595b6);
-            // border: 1px solid rgb(0, 0, 0);
-            box-shadow: 0.0125rem 0.05rem 0.15rem 0.05rem rgba(0, 0, 0, 0.35) !important;
-        }
-    }
-
-    .btn-add {
-        svg {
-            display: block;
-            margin-top: 2px;
-            color: rgb(14, 110, 65);
-        }
-    }
-
-    .btn-edit {
-        svg {
-            display: block;
-            margin-top: 2px;
-            color: rgb(23, 55, 201);
-        }
+    svg {
+        opacity: 0.7;
+        font-size: 1rem;
+        float: right;
     }
 }
     

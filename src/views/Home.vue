@@ -14,7 +14,8 @@ import OverviewCard from "@/components/OverviewCard.vue";
 })
 export default class Home extends Vue {}
 </script>
-<style lang="scss" scoped>
+
+<style lang="scss">
 .container {
     max-width: 100%;
 }

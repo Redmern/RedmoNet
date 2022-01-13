@@ -2,10 +2,17 @@
 
     <Menubar/>
 
-    <div class="main" :style="{'margin-left': menubarWidth}">
-    
-        <router-view />
+    <div class="main" :style="{'margin-left': menubarWidth}">   
+        <router-view v-slot="{ Component }">
 
+            <!-- enter-active-class="animate__animated animate__fadeInRight" 
+            leave-active-class="animate__animated animate__fadeOutRight"  -->
+<!-- 
+            <transition name="fade" mode="out-in"> -->
+                <component :is="Component" />
+            <!-- </transition> -->
+
+        </router-view> 
     </div>
 
 </template>
@@ -13,11 +20,11 @@
 <script lang="ts">
 
 import {mapState} from 'vuex'
-import Menubar from "@/components/Sidebar/Menubar.vue";
+import Menubar from "@/components/Menubar/Menubar.vue";
 
 export default {
     components: {
-    Menubar
+    Menubar,
     },
     computed:{
         ...mapState(['menubarWidth'])
@@ -59,5 +66,19 @@ body {
     position: absolute;
     left: 180px;
 }
+
+.page{
+    background: var(--background-bg);
+}
+
+// .fade-enter-to,
+// .fade-leave-to{
+//     opacity: 0;
+// }
+
+// .fade-enter-active,
+// .fade-leave-active{
+//     transition: opacity 0.1s ease-in-out;
+// }
 
 </style>

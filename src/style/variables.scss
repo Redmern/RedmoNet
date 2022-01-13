@@ -6,23 +6,30 @@
     // #72DDF7
     // #F4F4ED
 
-    --background-bg: rgb(255, 255, 255);
-    --background-bg2:rgb(252, 252, 233);
+    --background-bg: #131417;
+    --background-bg2:#131417;
 
     --overviewcard-bg:#F4F4ED;
+    
+    --walletcard-bg:#1E1F26;
+    --walletcard-bg2:#1E1F26;
 
-    --walletcard-bg:#B388EB;
-    --walletcard-bg2:#8093F1;
+    --wallet-card-text : #1E1F26;
 
-    --walletcard-btn:#72DDF7;
-    --walletcard-btn2:#72DDF7;
+    --walletcard-btn:#8093F1;
+    --walletcard-btn2:#8093F1;
 
-    --walletcard-btn-hover:#72ddf759;
-    --walletcard-btn-hover2:#72DDF7;
+    --walletcard-btn-hover:#8093F1;
+    --walletcard-btn-hover2:#8093f183;
 
-    --sidebar-bg:rgba(0, 0, 0, 0.781);
+    --menubar-bg:#1E1F26;
 
-    --sidebar-item-active:#276749;
-    --sidebar-item-active:#276749;
+    --menubar-item-active:#8093F1;
+    --menubar-item-hover:#93a2eb;
 
+    --item-shadow: rgba(0, 0, 0, 0.6) ;
+    --item-shadow-hover: rgba(0, 0, 0, 0.5);
+
+
+    
 }

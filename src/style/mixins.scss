@@ -4,3 +4,13 @@
         @content;
     }
 }
+
+@mixin shadow ($box-shadow-color, $box-shadow-color2) {
+    box-shadow: 0.07rem 0.075rem 0.1rem 0.1rem $box-shadow-color !important;
+
+    &:hover,
+    &:focus{
+        box-shadow: 0.04rem 0.04rem 0.05rem 0.1rem $box-shadow-color2 !important;
+    }
+}
+

@@ -99,16 +99,13 @@ export default  {
 }
 
 .main-card {
-    margin-top: 1%;
+    // margin-top: 1%;
     margin-right: 1%;
     margin-left: 1%;
     min-height: 95vh;
     padding: 3em 3em 3em 3em;
-    // box-shadow: 0 0 3em rgba(0, 0, 0, 0.25);
-    // background-color: var(--overviewcard-bg);
     background: -webkit-linear-gradient(90deg, var(--background-bg), var(--background-bg2));
     background: linear-gradient(90deg, var(--background-bg), var(--background-bg2));
-    // border-radius: 0.35rem;
     transition: margin-left .5s;
     transition: width .5s;
     border: none;

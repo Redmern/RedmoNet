@@ -1,7 +1,7 @@
 <template>
   <div class="card">
     <div class="card-header">
-      Featured
+      <h5>Featured</h5>
     </div>
     <div class="card-body">
       <h5 class="card-title">Special title treatment</h5>
@@ -30,6 +30,11 @@ export default class WalletCard extends Vue {
 
 @import './src/style/main.scss';
 
+h5,p{
+    color: #FFFFFF;
+    transition: .2s ease-in-out;
+}
+
 .card {
     padding: 3px 10px 0 10px;
     text-align: center;
@@ -37,12 +42,9 @@ export default class WalletCard extends Vue {
     background: linear-gradient(75deg, var(--walletcard-bg), var(--walletcard-bg2));
     border: 0;
     border-radius: 0.35rem;
-    box-shadow: 0.07rem 0.075rem 0.1rem 0.1rem rgba(0, 0, 0, 0.7) !important;
-    transition: box-shadow .3s;
+    transition: box-shadow .2s;
 
-    @include hover-focus {
-        box-shadow: 0.07rem 0.075rem 0.3rem 0.1rem #F7AEF8 !important;
-    }
+    @include shadow (var(--item-shadow), var(--item-shadow-hover));
 
     .card-header {
         border: 0;

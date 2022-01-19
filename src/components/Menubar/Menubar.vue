@@ -1,25 +1,33 @@
 <template>
   	<div class="menubar" :style="{ width: menubarWidth }">
-    	<h5>
-			<transition name="fade" mode="out-in">
+
+     	<h5>
+			 
+			<a>
+				<transition name="fade" mode="out-in">
+					
+					<span :class="{ full: !collapsed }" v-if="!collapsed"> 
+						RedmoNet
+					</span>
+	
+					<span class="abbreviation" v-else>
+						<div class="abbreviation">R</div>
+						<div class="abbreviation">M</div>
+						<div class="abbreviation">N</div>
+					</span>
+	
 				
-				<span :class="{ full: !collapsed }" v-if="!collapsed"> 
-					RedmoNet
-				</span>
-
-				<span class="abbreviation" v-else>
-					<div class="abbreviation">R</div>
-					<div class="abbreviation">M</div>
-					<div class="abbreviation">N</div>
-				</span>
-
-			</transition>
+				</transition>
+			</a>
 		</h5>
 
 		<div class="links" :class="{ 'links-full': !collapsed }">
 			<MenuBarLinks description="Overview" to="/" icon="fas fa-home" />
+			<MenuBarLinks description="Users" to="/OverviewUsers" icon="fas fa-users" />
+			<MenuBarLinks description="Wallets" to="/OverviewWallets" icon="fas fa-table" />
 			<MenuBarLinks description="Add User" to="/AddShareholder" icon="fas fa-user-plus"/>
 			<MenuBarLinks description="Add Wallet" to="/AddWallet" icon="fas fa-wallet" />
+			
 		</div>
 
 		<div class="Toggler justify-content-center" :style="{ width: menubarWidth }">
@@ -66,7 +74,7 @@ export default {
 
 .links {
 	position: absolute;
-	top: 40%;
+	top: 35%;
 	left: 20%;
 	transition: left .4s ease;
 }

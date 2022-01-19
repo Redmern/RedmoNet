@@ -3,6 +3,7 @@ import App from "./App.vue";
 import "./registerServiceWorker";
 import router from "./router";
 import store from "./store";
+import VueGun from 'vue-gun';
 import "bootstrap/dist/css/bootstrap.min.css"
 import "bootstrap"
 import '@fortawesome/fontawesome-free/js/fontawesome';

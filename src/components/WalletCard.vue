@@ -1,27 +1,35 @@
 <template>
   <div class="card">
     <div class="card-header">
-      <h5>Featured</h5>
+      <h5>{{name}}</h5>
     </div>
     <div class="card-body">
-      <h5 class="card-title">Special title treatment</h5>
-      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+      <h5 class="card-title">Amount : {{amount}} </h5>
+      <p class="card-text">Share : {{share}}</p>
       <a href="#" class="btn btn-primary">Go somewhere</a>
     </div>
   </div>
 </template>
 
 <script lang="ts">
+import { ListTypeNode, ListValueNode, ObjectValueNode } from "graphql";
+import gql from "graphql-tag"
 import { Options, Vue } from "vue-class-component";
 
 @Options({
   props: {
     msg: String,
+    name: String,
+    amount: Number,
+    share: Number
   },
 })
 
 export default class WalletCard extends Vue {
-  msg!: string;
+  msg: string;
+  name: string;
+  amount: number;
+  share: number;
 }
 </script>
 

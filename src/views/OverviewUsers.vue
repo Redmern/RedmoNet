@@ -1,22 +1,17 @@
 <template>
-        <div class="container overview">
-        <div class="card main-card">
-            
-            <div class="row">
-            
-                
-            </div>
-            
-        </div>  
+    <div class="page">1
+        <OverviewCard/>    
     </div>
 </template>
 
 <script lang="ts">
 
-import { Options, Vue } from "vue-class-component";
+import OverviewCard from "@/components/OverviewCard.vue"; 
 
 export default{
-
+    components: {
+        OverviewCard,
+    },
 }
 </script>
 

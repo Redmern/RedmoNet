@@ -39,3 +39,6 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 ### Build dist local
 npm install -g serve (if serve not installed)
 serve -s dist
+
+### Run Graphql db
+json-graphql-server db.js --p 1259

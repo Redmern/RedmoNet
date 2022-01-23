@@ -1,91 +1,66 @@
 <template>
-    <div class="container overview">
-        <div class="card main-card">
-            <section class="food-cards-overview">
-                <div class="row">
-                
-                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 wallet-card">
-                        <WalletCard/>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 wallet-card">
-                        <WalletCard/>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 wallet-card">
-                        <WalletCard/>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 wallet-card">
-                        <WalletCard/>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 wallet-card">
-                        <WalletCard/>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 wallet-card">
-                        <WalletCard/>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 wallet-card">
-                        <WalletCard/>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 wallet-card">
-                        <WalletCard/>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 wallet-card">
-                        <WalletCard/>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 wallet-card">
-                        <WalletCard/>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 wallet-card">
-                        <WalletCard/>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 wallet-card">
-                        <WalletCard/>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 wallet-card">
-                        <WalletCard/>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 wallet-card">
-                        <WalletCard/>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 wallet-card">
-                        <WalletCard/>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 wallet-card">
-                        <WalletCard/>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 wallet-card">
-                        <WalletCard/>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 wallet-card">
-                        <WalletCard/>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 wallet-card">
-                        <WalletCard/>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 wallet-card">
-                        <WalletCard/>
-                    </div>
-                </div>
-            </section>
-        </div>
-    </div>
+	<div class="container overview">
+		<div class="card main-card">
+			<section class="food-cards-overview">
+				<div class="row">
+
+					<p v-if="$apollo.queries.users.loading">Loading...</p> 
+					<div v-for="user in users" :key="user.id" class="col-lg-3 col-md-4 col-sm-6 col-xs-12 wallet-card">
+						<WalletCard :name="user.name" :amount="user.amount" :share="user.share"/>
+					</div>
+				</div>
+			</section>
+		</div>
+	</div>
 </template>
 
 <script lang="ts">
 
 import WalletCard from "@/components/WalletCard.vue"; 
 import {mapState} from 'vuex'
+import gql from "graphql-tag"
+
+const GetUsersQuery = gql`
+  query Users {
+    users {
+      id
+      name
+      amount
+      share
+    }
+  }
+`
+
 
 export default  {
     components: {
     WalletCard,
   },
   computed:{
-        ...mapState(['menubarWidth']),
-        ...mapState(['collapsed']),
-        decreaseWidth() {
-        return 'calc(100% - '+ this.menubarWidth +')';
-        }
-    },
+		...mapState(['menubarWidth']),
+		...mapState(['collapsed']),
+
+		decreaseWidth() {
+			return 'calc(100% - '+ this.menubarWidth +')';
+		}
+
+	},
+
+	data() {
+		return {
+			users: {},
+			error: false,
+		};
+	},
+
+	apollo: {
+		users:{
+			query: GetUsersQuery,
+			error() {
+				this.error = true;
+			}
+		}
+	}  
 }
 
 </script>

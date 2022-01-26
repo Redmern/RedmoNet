@@ -4,9 +4,9 @@
 			<section class="food-cards-overview">
 				<div class="row">
 
-					<p v-if="$apollo.queries.users.loading">Loading...</p> 
-					<div v-for="user in users" :key="user.id" class="col-lg-3 col-md-4 col-sm-6 col-xs-12 wallet-card">
-						<WalletCard :name="user.name" :amount="user.amount" :share="user.share"/>
+					<p v-if="$apollo.queries.userAccounts.loading">Loading...</p> 
+					<div v-for="userAccount in userAccounts" :key="userAccount.id" class="col-lg-3 col-md-4 col-sm-6 col-xs-12 wallet-card">
+						<WalletCard :name="userAccount.name" :amount="userAccount.amount" :share="userAccount.share"/>
 					</div>
 				</div>
 			</section>
@@ -18,18 +18,8 @@
 
 import WalletCard from "@/components/WalletCard.vue"; 
 import {mapState} from 'vuex'
-import gql from "graphql-tag"
-
-const GetUsersQuery = gql`
-  query Users {
-    users {
-      id
-      name
-      amount
-      share
-    }
-  }
-`
+import { GetUserAccountsQuery } from "./graphql/userAccountQuerries"
+import { useQuery, useResult,  } from "@vue/apollo-composable";
 
 
 export default  {
@@ -48,14 +38,16 @@ export default  {
 
 	data() {
 		return {
-			users: {},
+			userAccounts: {},
 			error: false,
 		};
 	},
 
 	apollo: {
-		users:{
-			query: GetUsersQuery,
+		userAccounts:{
+			query: GetUserAccountsQuery,
+			// mutation: AddUserAccountMutation,
+
 			error() {
 				this.error = true;
 			}

@@ -1,0 +1,35 @@
+import { gql } from "@apollo/client/core";
+
+export const GetUserAccountsQuery = gql`
+	query userAccounts {
+		userAccounts {
+			id
+			name
+			amount
+			share
+		}
+	}
+`
+
+export const GetUserAccountByIdQuery = gql`
+	query userAccounts {
+		userAccountById(id: $id) {
+			name
+			id
+			share
+			amount
+		}
+	}
+`
+
+export const AddUserAccountMutation = gql`
+  mutation addUserAccount($name: String!) {
+		addUserAccount(name: $name) {
+			name
+			id
+			amount
+			share
+		}
+	}
+`
+

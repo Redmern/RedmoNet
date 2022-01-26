@@ -7,7 +7,7 @@ import store from "./store";
 import { ApolloClient, InMemoryCache, createHttpLink } from "@apollo/client/core";
 import { createApolloProvider } from "@vue/apollo-option"
 
-import { DefaultApolloClient } from "@vue/apollo-composable";
+// import { DefaultApolloClient } from "@vue/apollo-composable";
 
 
 import "bootstrap/dist/css/bootstrap.min.css"

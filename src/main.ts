@@ -1,4 +1,4 @@
-import { createApp, h } from "vue";
+import { createApp, provide, h } from "vue";
 import App from "./App.vue";
 import "./registerServiceWorker";
 import router from "./router";
@@ -7,7 +7,7 @@ import store from "./store";
 import { ApolloClient, InMemoryCache, createHttpLink } from "@apollo/client/core";
 import { createApolloProvider } from "@vue/apollo-option"
 
-// import { DefaultApolloClient } from "@vue/apollo-composable";
+import { DefaultApolloClient } from "@vue/apollo-composable";
 
 
 import "bootstrap/dist/css/bootstrap.min.css"
@@ -43,5 +43,16 @@ const apolloProvider = createApolloProvider({
     defaultClient: apolloClient,
 });
 
-createApp(App).use(store).use(router).use(apolloProvider).mount("#app");
+createApp({
+    setup(){
+        provide(DefaultApolloClient, apolloClient)
+
+    },
+    render(){
+        return h(App)
+    }
+}).use(store).use(router).mount("#app")
+
+
+// createApp(App).use(store).use(router).use(apolloProvider).mount("#app");
 

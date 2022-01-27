@@ -8,11 +8,20 @@
 
 import OverviewCard from "@/components/OverviewCard.vue"; 
 
-export default{
-    components: {
+
+import { Options, Vue } from "vue-class-component";
+
+@Options({
+  components: {
         OverviewCard,
     },
+})
+
+export default class OverviewUsers extends Vue{
+    
+
 }
+
 </script>
 
 <style lang="scss">

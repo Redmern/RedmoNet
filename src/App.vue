@@ -21,14 +21,19 @@
 
 import {mapState} from 'vuex'
 import Menubar from "@/components/Menubar/Menubar.vue";
+import { Options, Vue } from "vue-class-component";
 
-export default {
-    components: {
+@Options({
+  components: {
     Menubar,
-    },
-    computed:{
+  },
+  computed:{
         ...mapState(['menubarWidth'])
     },
+})
+
+export default class App extends Vue{
+    
 
 }
 </script>

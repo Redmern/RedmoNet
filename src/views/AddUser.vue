@@ -11,12 +11,17 @@
 </template>
 
 <script lang="ts">
+import { Options, Vue } from "vue-class-component";
 import AddUserForm from "../components/Forms/AddUserForm.vue";
 
-export default {
+@Options({
   components: {
     AddUserForm,
-  },
+  }
+})
+
+export default class AddUser extends Vue{
+  
 };
 </script>
 

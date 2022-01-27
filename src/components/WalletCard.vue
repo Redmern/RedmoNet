@@ -4,32 +4,49 @@
       <h5>{{name}}</h5>
     </div>
     <div class="card-body">
-      <h5 class="card-title">Amount : {{amount}} </h5>
+      <p class="card-title">Amount : {{amount}} </p>
       <p class="card-text">Share : {{share}}</p>
-      <a href="#" class="btn btn-primary">Go somewhere</a>
+      <input v-model="Amount" placeholder="Enter amount" />
+      <p>{{ Amount }}</p>
+      <a class="btn btn-primary" @click="functionAddFundstoUser({id: id, amount: Amount})"> Add Funds</a>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { ListTypeNode, ListValueNode, ObjectValueNode } from "graphql";
-import gql from "graphql-tag"
+
 import { Options, Vue } from "vue-class-component";
+import {useMutation, useQuery, useResult} from '@vue/apollo-composable'
+import {AddFundsToUserAccountMutation} from './graphql/userAccountMutations'
+import {GetUserAccountsQuery} from './graphql/userAccountQuerries'
+
 
 @Options({
   props: {
-    msg: String,
     name: String,
     amount: Number,
-    share: Number
+    share: Number,
+    id: Number
   },
 })
 
 export default class WalletCard extends Vue {
-  msg: string;
-  name: string;
-  amount: number;
-  share: number;
+
+  result = useQuery(GetUserAccountsQuery)
+
+  addFundsToUserAccount = useMutation(AddFundsToUserAccountMutation, {
+    refetchQueries: ['userAccounts']
+  })
+
+  functionAddFundstoUser = this.addFundsToUserAccount.mutate
+
+  Amount: Float32Array
+
+  // data() {
+  //   return {
+  //     Amount: 0,
+  //   };
+  // }
 }
 </script>
 

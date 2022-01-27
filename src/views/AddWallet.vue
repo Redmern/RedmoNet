@@ -15,7 +15,7 @@
 
 import { Options, Vue } from "vue-class-component";
 
-export default{
+export default class AddWallet extends Vue{
 
 }
 </script>

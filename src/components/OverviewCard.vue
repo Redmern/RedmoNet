@@ -4,10 +4,11 @@
 			<section class="food-cards-overview">
 				<div class="row">
 
-					<p v-if="$apollo.queries.userAccounts.loading">Loading...</p> 
+					<p v-if="loading">Loading...</p>
 					<div v-for="userAccount in userAccounts" :key="userAccount.id" class="col-lg-3 col-md-4 col-sm-6 col-xs-12 wallet-card">
-						<WalletCard :name="userAccount.name" :amount="userAccount.amount" :share="userAccount.share"/>
+						<WalletCard :id="userAccount.id" :name="userAccount.name" :amount="userAccount.amount" :share="userAccount.share "/>
 					</div>
+
 				</div>
 			</section>
 		</div>
@@ -22,8 +23,13 @@ import { GetUserAccountsQuery } from "./graphql/userAccountQuerries"
 import { useQuery, useResult,  } from "@vue/apollo-composable";
 
 
-export default  {
-    components: {
+import { Options, Vue } from "vue-class-component";
+
+
+
+
+@Options({
+  components: {
     WalletCard,
   },
   computed:{
@@ -35,24 +41,18 @@ export default  {
 		}
 
 	},
+	
+})
 
-	data() {
-		return {
-			userAccounts: {},
-			error: false,
-		};
-	},
+export default class OverviewCard extends Vue {
+	
+	result = useQuery(GetUserAccountsQuery)
 
-	apollo: {
-		userAccounts:{
-			query: GetUserAccountsQuery,
-			// mutation: AddUserAccountMutation,
+	loading = this.result.loading
 
-			error() {
-				this.error = true;
-			}
-		}
-	}  
+	userAccounts = useResult(this.result.result, null, data => data.userAccounts)
+
+	
 }
 
 </script>

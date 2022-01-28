@@ -6,9 +6,14 @@
     <div class="card-body">
       <p class="card-title">Amount : {{amount}} </p>
       <p class="card-text">Share : {{share}}</p>
-      <input v-model="Amount" placeholder="Enter amount" />
+      <input inputmode="numeric" v-model="Amount" placeholder="Enter amount" />
       <p>{{ Amount }}</p>
-      <a class="btn btn-primary" @click="functionAddFundstoUser({id: id, amount: Amount})"> Add Funds</a>
+      <!-- <a class="btn btn-primary" @click="functionAddFundstoUser({id, Amount})"> Add Funds</a> -->
+
+      <a class="btn btn-primary" @click="Deposit(id)">Deposit</a>
+
+      <a class="btn btn-secondary" @click="Withdraw(id)">Withdraw</a>
+
     </div>
   </div>
 </template>
@@ -16,9 +21,8 @@
 <script lang="ts">
 
 import { Options, Vue } from "vue-class-component";
-import {useMutation, useQuery, useResult} from '@vue/apollo-composable'
-import {AddFundsToUserAccountMutation} from './graphql/userAccountMutations'
-import {GetUserAccountsQuery} from './graphql/userAccountQuerries'
+import { useMutation } from '@vue/apollo-composable'
+import { AddFundsToUserAccountMutation} from './graphql/userAccountMutations'
 
 
 @Options({
@@ -32,25 +36,51 @@ import {GetUserAccountsQuery} from './graphql/userAccountQuerries'
 
 export default class WalletCard extends Vue {
 
-  result = useQuery(GetUserAccountsQuery)
+  Amount = ""
 
-  addFundsToUserAccount = useMutation(AddFundsToUserAccountMutation, {
-    refetchQueries: ['userAccounts']
-  })
+  addFundsToUserAccount = null
 
-  functionAddFundstoUser = this.addFundsToUserAccount.mutate
+  Deposit(id: string){
+    
+    let fundsToAdd = parseFloat(this.Amount) 
 
-  Amount: Float32Array
+    this.addFundsToUserAccount = useMutation(AddFundsToUserAccountMutation, {variables: {id: id, amount: fundsToAdd} })
 
-  // data() {
-  //   return {
-  //     Amount: 0,
-  //   };
+    this.addFundsToUserAccount.mutate()
+    
+  }
+
+  Withdraw(id: string){
+    
+    let fundsToAdd = -parseFloat(this.Amount) 
+
+    this.addFundsToUserAccount = useMutation(AddFundsToUserAccountMutation, {variables: {id: id, amount: fundsToAdd} })
+
+    this.addFundsToUserAccount.mutate()
+    
+  }
+
+  // mutation = null
+
+  // addFunds(id: string, amount: number ) {
+    
+  //   this.mutation =  useMutation(AddFundsToUserAccountMutation, { refetchQueries: ['userAccounts'] }).mutate( {variables: {amount: amount, id: id} } )
+
+  //   console.log(id, amount);
+
+  //   console.log(this.mutation);
+    
+    
   // }
+
+ 
+  // addFundsToUserAccount = useMutation(AddFundsToUserAccountMutation, {refetchQueries: ['userAccounts'], variables: {id: "0", amount: 10} })
+
+  // functionAddFundstoUser = this.addFundsToUserAccount.mutate
+
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 
 @import './src/style/main.scss';

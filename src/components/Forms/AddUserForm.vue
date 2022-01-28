@@ -27,14 +27,7 @@ export default class AddUserFrom extends Vue{
     refetchQueries: ['userAccounts']
   })
 
-
-
-
   functionAddUser = this.addUserAccount.mutate
-  
-
-
-  
 
   data() {
     return {
@@ -42,5 +35,6 @@ export default class AddUserFrom extends Vue{
     };
   }
 }
+
 </script>
 

@@ -6,9 +6,8 @@ import store from "./store";
 
 import { ApolloClient, InMemoryCache, createHttpLink } from "@apollo/client/core";
 import { createApolloProvider } from "@vue/apollo-option"
-
+import { provideApolloClient } from "@vue/apollo-composable";
 import { DefaultApolloClient } from "@vue/apollo-composable";
-
 
 import "bootstrap/dist/css/bootstrap.min.css"
 import "bootstrap"
@@ -51,7 +50,9 @@ createApp({
     render(){
         return h(App)
     }
-}).use(store).use(router).mount("#app")
+}).use(store).use(apolloProvider).use(router).mount("#app")
+
+provideApolloClient(apolloClient)
 
 
 // createApp(App).use(store).use(router).use(apolloProvider).mount("#app");

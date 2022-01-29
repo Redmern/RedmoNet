@@ -2,21 +2,35 @@ import { gql } from "@apollo/client/core";
 
 export const GetUserAccountsQuery = gql`
 	query userAccounts {
-		userAccounts {
-			id
-			name
-			amount
-			share
-		}
+	userAccounts {
+		id
+		name
+		amount
+		share
 	}
+	adminAccount {
+		id
+		name
+		amount
+		share
+	}
+}
 `
 
 export const GetUserAccountByIdQuery = gql`
-	query userAccounts {
+	query userAccountById($id: ID!) {
 		userAccountById(id: $id) {
 			name
 			id
 			share
+			amount
+		}
+	}
+`
+
+export const GetAdminAccountQuery = gql`
+	query adminAccount {
+		userAccounts{
 			amount
 		}
 	}

@@ -1,3 +1,3 @@
 module.exports = {
-    schema: 'https://localhost:4000'
+    schema: 'http://localhost:4000'
   };

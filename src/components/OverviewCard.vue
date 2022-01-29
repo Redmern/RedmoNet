@@ -2,11 +2,18 @@
 	<div class="container overview">
 		<div class="card main-card">
 			<section class="food-cards-overview">
-				<div class="row">
 
-					<p v-if="loading">Loading...</p>
-					<div v-for="userAccount in userAccounts" :key="userAccount.id" class="col-lg-3 col-md-4 col-sm-6 col-xs-12 wallet-card">
-						<WalletCard :id="userAccount.id" :name="userAccount.name" :amount="userAccount.amount" :share="userAccount.share "/>
+				<p v-if="isGetUserAccountsQueryLoading">Loading...</p>
+
+				<div v-else>
+
+					
+
+					<div class="row">
+						
+						<div v-for="userAccount in userAccounts" :key="userAccount.id" class="col-lg-4 col-md-4 col-sm-6 col-xs-12 wallet-card">
+							<WalletCard :id="userAccount.id" :name="userAccount.name" :amount="userAccount.amount" :share="userAccount.share "/>
+						</div>
 					</div>
 
 				</div>
@@ -18,21 +25,20 @@
 <script lang="ts">
 
 import WalletCard from "@/components/WalletCard.vue"; 
-import {mapState} from 'vuex'
-import { GetUserAccountsQuery } from "./graphql/userAccountQuerries"
-import { useQuery, useResult,  } from "@vue/apollo-composable";
 
-
+import { mapState } from 'vuex'
 import { Options, Vue } from "vue-class-component";
 
-
-
+import { GetUserAccountsQuery , GetAdminAccountQuery} from "./graphql/userAccountQuerries"
+import { useQuery, useResult } from "@vue/apollo-composable";
 
 @Options({
-  components: {
-    WalletCard,
-  },
-  computed:{
+	
+	components: {
+		WalletCard,
+	},
+
+	computed:{
 		...mapState(['menubarWidth']),
 		...mapState(['collapsed']),
 
@@ -41,18 +47,16 @@ import { Options, Vue } from "vue-class-component";
 		}
 
 	},
-	
 })
 
 export default class OverviewCard extends Vue {
-	
-	result = useQuery(GetUserAccountsQuery)
 
-	loading = this.result.loading
+	resultGetUserAccountsQuery = useQuery(GetUserAccountsQuery)
 
-	userAccounts = useResult(this.result.result, null, data => data.userAccounts)
+	isGetUserAccountsQueryLoading = this.resultGetUserAccountsQuery.loading
 
-	
+	userAccounts = useResult(this.resultGetUserAccountsQuery.result, null, data => data.userAccounts)
+	// adminAccount = useResult(this.resultGetUserAccountsQuery.result, null, data => data.adminAccount)
 }
 
 </script>

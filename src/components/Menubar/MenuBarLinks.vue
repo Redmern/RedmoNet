@@ -13,8 +13,6 @@
 
 <script>
 
-import {computed} from 'vue'
-import {useRoute} from 'vue-router'
 import {mapState} from 'vuex'
 
 export default {

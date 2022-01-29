@@ -1,60 +1,97 @@
 <template>
-  <div class="menubar" :style="{ width: menubarWidth }">
-    <h5>
-      <a>
-        <transition name="fade" mode="out-in">
-          <span :class="{ full: !collapsed }" v-if="!collapsed"> RedmoNet </span>
+	<div class="menubar" :style="{ width: menubarWidth }">
+		<h5>
+			<a>
+				<transition name="fade" mode="out-in">
 
-          <span class="abbreviation" v-else>
-            <div class="abbreviation">R</div>
-            <div class="abbreviation">M</div>
-            <div class="abbreviation">N</div>
-          </span>
-        </transition>
-      </a>
-    </h5>
+					<span :class="{ full: !collapsed }" v-if="!collapsed"> RedmoNet </span>
 
-    <div class="links" :class="{ 'links-full': !collapsed }">
-      <MenuBarLinks description="Overview" to="/" icon="fas fa-home" />
-      <MenuBarLinks description="Users" to="/OverviewUsers" icon="fas fa-users" />
-      <MenuBarLinks description="Wallets" to="/OverviewWallets" icon="fas fa-table" />
-      <MenuBarLinks description="Add User" to="/AddUser" icon="fas fa-user-plus" />
-      <MenuBarLinks description="Add Wallet" to="/AddWallet" icon="fas fa-wallet" />
-    </div>
+					<span class="abbreviation" v-else>
+						<div class="abbreviation">R</div>
+						<div class="abbreviation">M</div>
+						<div class="abbreviation">N</div>
+					</span>
 
-    <div class="Toggler justify-content-center" :style="{ width: menubarWidth }">
-      <span
-        class="collapse-icon"
-        :class="{ 'rotate-180': collapsed, 'reverse-180': !collapsed }"
-        @click="ToggleMenubar"
-      >
-        <i class="fas fa-chevron-up" />
-      </span>
-    </div>
-  </div>
+				</transition>
+			</a>
+		</h5>
+
+		<transition name="fade" mode="out-in">
+			<div class="row" v-if="!collapsed">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 wallet-card">
+					<div class="card">
+	
+						<div class="card-body">
+	
+							<h6 class="card-title">Total: ${{adminAccount.amount}} </h6>
+							<!-- <input inputmode="numeric" v-model="Amount" placeholder="Enter amount" /> -->
+							<!-- <a class="btn btn-primary" @click="Deposit(id)">Deposit</a>
+							<a class="btn btn-secondary" @click="Withdraw(id)">Withdraw</a> -->
+						</div>
+						
+					</div>
+				</div>
+			</div>
+		</transition>
+
+		<div class="links" :class="{ 'links-full': !collapsed }">
+			<MenuBarLinks description="Overview" to="/" icon="fas fa-home" />
+			<MenuBarLinks description="Users" to="/OverviewUsers" icon="fas fa-users" />
+			<MenuBarLinks description="Wallets" to="/OverviewWallets" icon="fas fa-table" />
+			<MenuBarLinks description="Add User" to="/AddUser" icon="fas fa-user-plus" />
+			<MenuBarLinks description="Add Wallet" to="/AddWallet" icon="fas fa-wallet" />
+		</div>
+
+		<div class="Toggler justify-content-center" :style="{ width: menubarWidth }">
+
+			<span class="collapse-icon"	:class="{ 'rotate-180': collapsed, 'reverse-180': !collapsed }"	@click="ToggleMenubar">
+				<i class="fas fa-chevron-up" />
+			</span>
+
+		</div>
+	</div>
 </template>
 
 <script lang="ts">
 import { mapMutations, mapState } from "vuex";
 import MenuBarLinks from "./MenuBarLinks.vue";
+import { Options, Vue } from "vue-class-component";
 
-export default {
-  components: {
-    MenuBarLinks,
-  },
+import { GetUserAccountsQuery } from "../graphql/userAccountQuerries"
+import { useQuery, useResult } from "@vue/apollo-composable";
 
-  computed: {
-    ...mapState(["menubarWidth"]),
-    ...mapState(["collapsed"]),
-  },
+@Options({
+	components: {
+		MenuBarLinks,
+	},
 
-  methods: {
-    ...mapMutations(["ToggleMenubar"]),
-    ToggleMenubar(state) {
-      this.$store.commit("ToggleMenubar", this.collapsed);
-    },
-  },
-};
+	computed: {
+		...mapState(["menubarWidth"]),
+		...mapState(["collapsed"]),
+	},
+
+	methods: {
+		...mapMutations(["ToggleMenubar"]),
+		ToggleMenubar(state) {
+		this.$store.commit("ToggleMenubar", this.collapsed);
+		},
+	}
+})
+
+export default class Menubar extends Vue {
+
+	resultGetAdminAccountQuery = useQuery(GetUserAccountsQuery)
+
+	isGetUserAccountsQueryLoading = this.resultGetAdminAccountQuery.loading
+
+	adminAccount = useResult(this.resultGetAdminAccountQuery.result, null, data => data.adminAccount)
+
+	mounted(){
+		console.log(this.adminAccount);
+		
+	}
+
+}
 </script>
 
 <style scoped lang="scss">
@@ -113,6 +150,7 @@ export default {
 
   h5 {
     margin-top: 10px;
+	margin-bottom: 50px;
     text-align: center;
   }
 
@@ -162,5 +200,40 @@ export default {
       font-size: 1.5rem;
     }
   }
+}
+
+h5,p{
+    color: #FFFFFF;
+    transition: .2s ease-in-out;
+}
+
+.card {
+    padding: 3px 10px 0 10px;
+    text-align: center;
+    background: -webkit-linear-gradient(75deg, var(--walletcard-bg), var(--walletcard-bg2));
+    background: linear-gradient(75deg, var(--walletcard-bg), var(--walletcard-bg2));
+    border: 0;
+    border-radius: 0.35rem;
+    transition: box-shadow .2s;
+
+    @include shadow (var(--item-shadow), var(--item-shadow-hover));
+
+    .card-header {
+        border: 0;
+        padding: 0;
+        background: none;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    .card-body {
+        padding: 1.25rem 0;
+
+        > svg {
+            font-size: 2rem;
+            margin-top: 50px;
+            margin-bottom: 35px;
+        }
+    }
 }
 </style>

@@ -23,6 +23,9 @@ import {mapState} from 'vuex'
 import Menubar from "@/components/Menubar/Menubar.vue";
 import { Options, Vue } from "vue-class-component";
 
+import { GetUserAccountsQuery } from "./components/graphql/userAccountQuerries"
+import { useQuery, useResult } from "@vue/apollo-composable";
+
 @Options({
   components: {
     Menubar,
@@ -34,7 +37,16 @@ import { Options, Vue } from "vue-class-component";
 
 export default class App extends Vue{
     
+    resultGetAdminAccountQuery = useQuery(GetUserAccountsQuery)
 
+	isGetUserAccountsQueryLoading = this.resultGetAdminAccountQuery.loading
+
+	adminAccount = useResult(this.resultGetAdminAccountQuery.result, null, data => data.adminAccount)
+
+	mounted(){
+		console.log(this.adminAccount);
+		
+	}
 }
 </script>
 

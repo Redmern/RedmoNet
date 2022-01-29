@@ -9,7 +9,7 @@
 
 <script lang="ts">
 
-import {useMutation, useQuery, useResult} from '@vue/apollo-composable'
+import {useMutation, useQuery} from '@vue/apollo-composable'
 import {AddUserAccountMutation} from '../graphql/userAccountMutations'
 import {GetUserAccountsQuery} from '../graphql/userAccountQuerries'
 import { Options, Vue } from "vue-class-component";
@@ -21,19 +21,19 @@ import { Options, Vue } from "vue-class-component";
 
 export default class AddUserFrom extends Vue{
 
+  Name = ""
+
   result = useQuery(GetUserAccountsQuery)
 
   addUserAccount = useMutation(AddUserAccountMutation, {
     refetchQueries: ['userAccounts']
   })
 
+  loading = this.addUserAccount.loading
+
   functionAddUser = this.addUserAccount.mutate
 
-  data() {
-    return {
-      Name: "",
-    };
-  }
+  
 }
 
 </script>

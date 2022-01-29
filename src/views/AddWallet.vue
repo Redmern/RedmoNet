@@ -26,7 +26,7 @@ export default class AddWallet extends Vue{
 }
 
 .main-card {
-    // margin-top: 1%;
+    margin-top: 1.5%;
     margin-right: 1%;
     margin-left: 1%;
     min-height: 95vh;

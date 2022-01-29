@@ -1,5 +1,4 @@
 import { gql } from "@apollo/client/core";
-import { DefaultApolloClient, useApolloClient } from "@vue/apollo-composable";
 
 export const AddUserAccountMutation = gql`
   mutation addUserAccount($name: String!) {

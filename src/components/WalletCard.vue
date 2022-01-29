@@ -30,7 +30,7 @@
 
 import { Options, Vue } from "vue-class-component";
 import { useMutation } from '@vue/apollo-composable'
-import { AddFundsToUserAccountMutation} from './graphql/userAccountMutations'
+import { AddFundsToUserAccountMutation} from '@/graphql/userAccountMutations'
 
 @Options({
   props: {

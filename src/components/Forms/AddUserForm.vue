@@ -10,8 +10,8 @@
 <script lang="ts">
 
 import {useMutation, useQuery} from '@vue/apollo-composable'
-import {AddUserAccountMutation} from '../graphql/userAccountMutations'
-import {GetUserAccountsQuery} from '../graphql/userAccountQuerries'
+import {AddUserAccountMutation} from '@/graphql/userAccountMutations'
+import {GetUserAccountsQuery} from '@/graphql/userAccountQuerries'
 import { Options, Vue } from "vue-class-component";
 
 @Options({

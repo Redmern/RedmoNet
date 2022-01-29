@@ -22,11 +22,7 @@
 					<div class="card">
 	
 						<div class="card-body">
-	
-							<h6 class="card-title">Total: ${{adminAccount.amount}} </h6>
-							<!-- <input inputmode="numeric" v-model="Amount" placeholder="Enter amount" /> -->
-							<!-- <a class="btn btn-primary" @click="Deposit(id)">Deposit</a>
-							<a class="btn btn-secondary" @click="Withdraw(id)">Withdraw</a> -->
+							<h6 class="card-title">Total:  ${{getAdminAccountAmount()}}</h6>
 						</div>
 						
 					</div>
@@ -57,8 +53,9 @@ import { mapMutations, mapState } from "vuex";
 import MenuBarLinks from "./MenuBarLinks.vue";
 import { Options, Vue } from "vue-class-component";
 
-import { GetUserAccountsQuery } from "../graphql/userAccountQuerries"
+import { GetUserAccountsQuery } from "@/graphql/userAccountQuerries"
 import { useQuery, useResult } from "@vue/apollo-composable";
+import { ref } from "@vue/reactivity";
 
 @Options({
 	components: {
@@ -85,12 +82,14 @@ export default class Menubar extends Vue {
 	isGetUserAccountsQueryLoading = this.resultGetAdminAccountQuery.loading
 
 	adminAccount = useResult(this.resultGetAdminAccountQuery.result, null, data => data.adminAccount)
-
-	mounted(){
-		console.log(this.adminAccount);
-		
+	
+	getAdminAccountAmount (){
+		if(!this.isGetUserAccountsQueryLoading)
+		{
+			const x = ref(this.adminAccount)
+			return x.value.amount
+		}
 	}
-
 }
 </script>
 
@@ -213,27 +212,12 @@ h5,p{
     background: -webkit-linear-gradient(75deg, var(--walletcard-bg), var(--walletcard-bg2));
     background: linear-gradient(75deg, var(--walletcard-bg), var(--walletcard-bg2));
     border: 0;
-    border-radius: 0.35rem;
     transition: box-shadow .2s;
-
+	
     @include shadow (var(--item-shadow), var(--item-shadow-hover));
-
-    .card-header {
-        border: 0;
-        padding: 0;
-        background: none;
-        margin-top: 10px;
-        margin-bottom: 10px;
-    }
-
+	
     .card-body {
-        padding: 1.25rem 0;
-
-        > svg {
-            font-size: 2rem;
-            margin-top: 50px;
-            margin-bottom: 35px;
-        }
+        padding: .5rem 0;
     }
 }
 </style>

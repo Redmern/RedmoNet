@@ -5,17 +5,17 @@
 
 				<p v-if="isGetUserAccountsQueryLoading">Loading...</p>
 
+
+
+
 				<div v-else>
-
-					
-
 					<div class="row">
 						
 						<div v-for="userAccount in userAccounts" :key="userAccount.id" class="col-lg-4 col-md-4 col-sm-6 col-xs-12 wallet-card">
 							<WalletCard :id="userAccount.id" :name="userAccount.name" :amount="userAccount.amount" :share="userAccount.share "/>
 						</div>
-					</div>
 
+					</div>
 				</div>
 			</section>
 		</div>
@@ -29,7 +29,7 @@ import WalletCard from "@/components/WalletCard.vue";
 import { mapState } from 'vuex'
 import { Options, Vue } from "vue-class-component";
 
-import { GetUserAccountsQuery , GetAdminAccountQuery} from "./graphql/userAccountQuerries"
+import { GetUserAccountsQuery , GetAdminAccountQuery} from "@/graphql/userAccountQuerries"
 import { useQuery, useResult } from "@vue/apollo-composable";
 
 @Options({

@@ -1,5 +1,5 @@
 <template>
-    <div class="page">1
+    <div class="page">
         <OverviewCard/>    
     </div>
 </template>

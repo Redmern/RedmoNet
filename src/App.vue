@@ -23,7 +23,7 @@ import {mapState} from 'vuex'
 import Menubar from "@/components/Menubar/Menubar.vue";
 import { Options, Vue } from "vue-class-component";
 
-import { GetUserAccountsQuery } from "./components/graphql/userAccountQuerries"
+import { GetUserAccountsQuery } from "@/graphql/userAccountQuerries"
 import { useQuery, useResult } from "@vue/apollo-composable";
 
 @Options({

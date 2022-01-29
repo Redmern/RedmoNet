@@ -9,7 +9,7 @@
 
 			<p class="card-title">Funds: ${{amount}}</p>
 			<p class="card-text">Share: {{share}}%</p>
-			<!-- <input inputmode="numeric" v-model="Amount" placeholder="Enter amount" /> -->
+			<input inputmode="numeric" v-model="Amount" placeholder="Enter amount" />
 
 			<div v-if="name == `Admin` "> 
 				<a class="btn btn-primary btn-admin" @click="Deposit(id)">Update Total</a>
@@ -34,7 +34,7 @@ import { AddFundsToUserAccountMutation} from './graphql/userAccountMutations'
 
 @Options({
   props: {
-    name: String,
+    name: String, 
     amount: Number,
     share: Number,
     id: String

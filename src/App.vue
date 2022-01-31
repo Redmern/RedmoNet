@@ -58,7 +58,8 @@ export default class App extends Vue{
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-
+    overflow: hidden;
+    
     * {
         font-family: 'MyWebFont', sans-serif;
         font-weight: 400;

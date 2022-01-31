@@ -1,17 +1,16 @@
 <template>
-
-	<div class="grid-container">
-
-	</div>
-
+  <div class="grid-container overview">
+    <!-- <div class="card main-card">
+    </div> -->
+  </div>
 </template>
 
 <script lang="ts">
-import { Options, Vue } from "vue-class-component"; 
+import { Options, Vue } from "vue-class-component";
 
 @Options({
-	components: {
-	},
+  components: {
+  },
 })
 
 export default class Home extends Vue {
@@ -21,19 +20,22 @@ export default class Home extends Vue {
 }
 </script>
 
-
-
-<style lang="scss">
-
+<style scoped lang="scss">
 .grid-container {
     max-width: 100%;
+	margin-right: 1%;
+    margin-left: 1%;
+    min-height: 95vh;
+    padding: 3em 3em 3em 3em;
+    background: linear-gradient(90deg, var(--background-bg), var(--background-bg2));
+    transition: margin-left 0.5s;
+    transition: width 0.5s;
+    border: none;
+
 	display: grid;
-	width: 100%;
-	height: 100%;
 }
 
 p{
- 	 color: white;
+  color: white;
 }
-
 </style> 

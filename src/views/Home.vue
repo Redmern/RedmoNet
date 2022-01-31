@@ -13,12 +13,10 @@
 </template>
 
 <script lang="ts">
-import { Options, Vue } from "vue-class-component";
-import OverviewCard from "@/components/OverviewCard.vue"; 
+import { Options, Vue } from "vue-class-component"; 
 
 @Options({
   components: {
-    OverviewCard,
   },
 })
 

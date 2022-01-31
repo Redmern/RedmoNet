@@ -1,24 +1,52 @@
 <template>
     <div class="page">
-        <OverviewCard/>    
+        <div class="container overview">
+            <div class="card main-card">
+                <section class="food-cards-overview">
+
+                    <p v-if="isGetUserAccountsQueryLoading">Loading...</p>
+
+
+
+
+                    <div v-else>
+                        <div class="row">
+                            
+                            <div v-for="userAccount in userAccounts" :key="userAccount.id" class="col-lg-4 col-md-4 col-sm-6 col-xs-12 wallet-card">
+                                <WalletCard :id="userAccount.id" :name="userAccount.name" :amount="userAccount.amount" :share="userAccount.share "/>
+                            </div>
+
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>   
     </div>
 </template>
 
 <script lang="ts">
 
-import OverviewCard from "@/components/OverviewCard.vue"; 
-
-
 import { Options, Vue } from "vue-class-component";
+
+
+import { GetUserAccountsQuery , GetAdminAccountQuery} from "@/graphql/userAccountQuerries"
+import { useQuery, useResult } from "@vue/apollo-composable";
+
+import WalletCard from "@/components/WalletCard.vue"; 
 
 @Options({
   components: {
-        OverviewCard,
-    },
+		WalletCard
+	},
 })
 
 export default class OverviewUsers extends Vue{
     
+	resultGetUserAccountsQuery = useQuery(GetUserAccountsQuery)
+
+	isGetUserAccountsQueryLoading = this.resultGetUserAccountsQuery.loading
+
+	userAccounts = useResult(this.resultGetUserAccountsQuery.result, null, data => data.userAccounts)
 
 }
 

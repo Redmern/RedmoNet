@@ -97,13 +97,13 @@ export default class Menubar extends Vue {
 @import "./src/style/main.scss";
 
 .links-full {
-  left: 15% !important;
+  left: 20% !important;
 }
 
 .links {
   position: absolute;
   top: 35%;
-  left: 20%;
+  left: 25%;
   transition: left 0.4s ease;
 }
 

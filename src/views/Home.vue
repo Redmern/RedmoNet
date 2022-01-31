@@ -1,23 +1,17 @@
 <template>
-  <div class="container overview">
-    <div class="card main-card">
-      <section class="food-cards-overview">
-        <div class="row">
-          <p>
-            Hallo
-          </p>
-        </div>
-      </section>
-    </div>
-  </div>
+
+	<div class="grid-container">
+
+	</div>
+
 </template>
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component"; 
 
 @Options({
-  components: {
-  },
+	components: {
+	},
 })
 
 export default class Home extends Vue {
@@ -30,11 +24,16 @@ export default class Home extends Vue {
 
 
 <style lang="scss">
-.container {
+
+.grid-container {
     max-width: 100%;
+	display: grid;
+	width: 100%;
+	height: 100%;
 }
 
 p{
-  color: white;
+ 	 color: white;
 }
+
 </style> 

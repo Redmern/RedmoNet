@@ -1,7 +1,9 @@
 <template>
+
     <div class="page">
         <OverviewCard/>    
     </div>
+    
 </template>
 
 <script lang="ts">

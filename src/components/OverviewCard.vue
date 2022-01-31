@@ -4,10 +4,7 @@
 			<section class="food-cards-overview">
 
 				<p v-if="isGetUserAccountsQueryLoading">Loading...</p>
-
-
-
-
+				
 				<div v-else>
 					<div class="row">
 						
@@ -17,6 +14,7 @@
 
 					</div>
 				</div>
+
 			</section>
 		</div>
 	</div>
@@ -29,7 +27,7 @@ import WalletCard from "@/components/WalletCard.vue";
 import { mapState } from 'vuex'
 import { Options, Vue } from "vue-class-component";
 
-import { GetUserAccountsQuery , GetAdminAccountQuery} from "@/graphql/userAccountQuerries"
+import { GetUserAccountsQuery } from "@/graphql/userAccountQuerries"
 import { useQuery, useResult } from "@vue/apollo-composable";
 
 @Options({

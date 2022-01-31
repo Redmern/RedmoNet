@@ -1,26 +1,23 @@
 <template>
 
-    <Menubar/>
+    <transition name="fade" mode="out-in">
+        <div class="grid-container" :class="{ 'collapsed': collapsed, 'full': !collapsed }">
 
-    <div class="main" :style="{'margin-left': menubarWidth}">   
-        <router-view v-slot="{ Component }">
+            <div class="grid menubar">
+                <Sidebar/>
+            </div>
 
-            <!-- enter-active-class="animate__animated animate__fadeInRight" 
-            leave-active-class="animate__animated animate__fadeOutRight"  -->
-<!-- 
-            <transition name="fade" mode="out-in"> -->
-                <component :is="Component" />
-            <!-- </transition> -->
+            <div class="grid page">
+            </div>   
 
-        </router-view> 
-    </div>
-
+        </div>
+    </transition>
 </template>
 
 <script lang="ts">
 
 import {mapState} from 'vuex'
-import Menubar from "@/components/Menubar/Menubar.vue";
+import Sidebar from "@/components/Sidebar.vue";
 import { Options, Vue } from "vue-class-component";
 
 import { GetUserAccountsQuery } from "@/graphql/userAccountQuerries"
@@ -28,10 +25,10 @@ import { useQuery, useResult } from "@vue/apollo-composable";
 
 @Options({
   components: {
-    Menubar,
+    Sidebar
   },
   computed:{
-        ...mapState(['menubarWidth'])
+		...mapState(["collapsed"]),
     },
 })
 
@@ -54,48 +51,43 @@ export default class App extends Vue{
 
 @import './src/style/main.scss';
 
-* {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-
-    * {
-        font-family: 'MyWebFont', sans-serif;
-        font-weight: 400;
-    }
+*{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
 }
 
-.main{
-    transition: 0.5s ease;
-}
-
-::-webkit-scrollbar {
-    width: 0px;
-    background: transparent;
-}
-
-body {
+.grid-container{
     background: -webkit-linear-gradient(90deg, var(--background-bg), var(--background-bg2));
     background: linear-gradient(90deg, var(--background-bg), var(--background-bg2));
+    
+    display: grid;
+
+    width: 100%;
+    height: 100%;
+    margin-inline: auto;
+    transition: all 0.5s ease;
 }
 
-.menuBarCollapsed{
-    position: absolute;
-    left: 180px;
+.full{
+    grid-template-columns: 60px 1fr;
+    transition: all 0.5s ease;
 }
 
-.page{
-    background: var(--background-bg);
+.collapsed{
+    grid-template-columns: 200px 1fr;
+    transition: all 0.5s ease;
 }
 
-// .fade-enter-to,
-// .fade-leave-to{
-//     opacity: 0;
-// }
 
-// .fade-enter-active,
-// .fade-leave-active{
-//     transition: opacity 0.1s ease-in-out;
-// }
+.grid{
+    color: white;
+    border: 1px white;
+}
+
+.menubar{
+    background-color: var(--menubar-bg);
+    transition: all 0.5s ease;
+}
 
 </style>

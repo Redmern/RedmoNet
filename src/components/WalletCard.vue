@@ -119,9 +119,7 @@ p{
     border: 0;
     border-radius: 0.35rem;
     transition: box-shadow .2s;
-
-    @include shadow (var(--item-shadow), var(--item-shadow-hover));
-
+    
     .card-header {
         border: 0;
         padding: 0;

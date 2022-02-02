@@ -2,15 +2,15 @@
 
     <Menubar/>
 
-    <div class="main" :style="{'margin-left': menubarWidth}">   
+    <div class="main" :style="{'margin-left': menubarWidth}">  
         <router-view v-slot="{ Component }">
 
             <!-- enter-active-class="animate__animated animate__fadeInRight" 
             leave-active-class="animate__animated animate__fadeOutRight"  -->
-<!-- 
-            <transition name="fade" mode="out-in"> -->
+
+            <transition name="fade" mode="out-in"> 
                 <component :is="Component" />
-            <!-- </transition> -->
+            </transition>
 
         </router-view> 
     </div>
@@ -66,6 +66,10 @@ export default class App extends Vue{
     }
 }
 
+.card{
+    // @include shadow (var(--item-shadow-hover), var(--item-shadow));
+}
+
 .main{
     transition: 0.5s ease;
 }
@@ -89,14 +93,14 @@ body {
     background: var(--background-bg);
 }
 
-// .fade-enter-to,
-// .fade-leave-to{
-//     opacity: 0;
-// }
+.fade-enter-to,
+.fade-leave-to{
+    opacity: 0;
+}
 
-// .fade-enter-active,
-// .fade-leave-active{
-//     transition: opacity 0.1s ease-in-out;
-// }
+.fade-enter-active,
+.fade-leave-active{
+    transition: opacity 0.1s ease-in-out;
+}
 
 </style>

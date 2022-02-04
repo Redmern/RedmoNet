@@ -1,73 +1,72 @@
 <template>
-  <div class="grid-container overview">
 
-	<div class="top content card">
-
+	<div class="wrapper">
+		<div class=" wallet-container">
+			<p v-if="isGetUserAccountsQueryLoading">Loading...</p>
+		
+			<div v-else v-for="userAccount in userAccounts" :key="userAccount.id">
+				<WalletCard :id="userAccount.id" :name="userAccount.name" :amount="userAccount.amount" :share="userAccount.share "/>
+			</div>
+		</div>
 	</div>
 
-    <div class="main content card">
-		
-	</div>	
+
+	<!-- <div class=" wallet-container">
+		<p v-if="isGetUserAccountsQueryLoading">Loading...</p>
 	
-  </div>
+		<div v-else>
+			<div class="row">
+				
+				<div v-for="userAccount in userAccounts" :key="userAccount.id" class="col-lg-3 col-md-4 col-sm-6 col-xs-12 wallet-card">
+					<WalletCard :id="userAccount.id" :name="userAccount.name" :amount="userAccount.amount" :share="userAccount.share "/>
+				</div>
+	
+			</div>
+		</div>
+	</div> -->
+
+
 </template>
 
 <script lang="ts">
+
 import { Options, Vue } from "vue-class-component";
+
+
+import { GetUserAccountsQuery } from "@/graphql/userAccountQuerries"
+import { useQuery, useResult } from "@vue/apollo-composable";
+
+import WalletCard from "@/components/WalletCard.vue"; 
 
 @Options({
   components: {
-  },
+		WalletCard
+	},
 })
 
-export default class Home extends Vue {
-  
-  
+export default class OverviewUsers extends Vue{
+    
+	resultGetUserAccountsQuery = useQuery(GetUserAccountsQuery)
+
+	isGetUserAccountsQueryLoading = this.resultGetUserAccountsQuery.loading
+
+	userAccounts = useResult(this.resultGetUserAccountsQuery.result, null, data => data.userAccounts)
 
 }
 </script>
 
 <style scoped lang="scss">
 
-.grid-container {
-    max-width: 100%;
-    min-height: 100vh;
-    background: linear-gradient(90deg, var(--background-bg), var(--background-bg2));
-    border: none;
+.wrapper{
+	padding: 100px 100px 25px 75px;
+}
 
+.wallet-container{
 	display: grid;
-	margin-inline: auto;
-
-	grid-template-columns: 0% auto 0%;
-	grid-template-rows: 0% 7% auto 0%;
-	gap: var(--card-gap);
-	grid-template-areas: 
-	" header header header "
-	" left-side top right-side "
-	" left-side main right-side "
-	" left-footer footer right-footer "
-	;
-}
-
-.card{
-	border-radius: 0.75rem;
-}
-
-.content{
-	max-width: 100%;
-    min-height: 100%;
-
-	color: white;
+	grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+	justify-content: space-around;
+	gap: 1.5rem;
 	
-	background-color: var(--menubar-bg);
-}
-
-.top{
-	grid-area: top;
-}
-
-.main{
-	grid-area: main;
 }
 
 </style> 

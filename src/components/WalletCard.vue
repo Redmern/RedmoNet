@@ -1,29 +1,36 @@
 <template>
 	<div class="card">
-		
+
 		<div class="card-header">
 			<h5>{{name}}</h5>
 		</div>
-		<div v-if="loading">Loading...</div>
+
+		<div v-if="loading">
+			Loading...
+		</div>
+
 		<div class="card-body">
 
 			<p class="card-title">Funds: ${{amount}}</p>
 			<p class="card-text">Share: {{share}}%</p>
-			<input inputmode="numeric" v-model="Amount" placeholder="Enter amount" />
 
-			<div v-if="name == `Admin` "> 
-				<a class="btn btn-primary btn-admin" @click="Deposit(id)">Update Total</a>
+			<!-- <input inputmode="numeric" v-model="Amount" placeholder="Enter amount" /> -->
+			
+
+			<div class="funds-menu">
+				Funds
 			</div>
 
-			<div v-else> 
-				<a class="btn btn-primary" @click="Deposit(id)">Deposit</a>
-
-				<a class="btn btn-secondary" @click="Withdraw(id, amount)">Withdraw</a>
-			</div>
+			<!-- <div class="funds-menu">
+				<a class="btn btn-primary btn-deposit" @click="Deposit(id)"><i class="fas fa-plus" /></a>
+				<a class="btn btn-primary btn-withdraw" @click="Withdraw(id, amount)"><i class="fas fa-minus"/>	</a>
+			</div> -->
 
 		</div>
-
 	</div>
+
+
+	
 </template>
 
 <script lang="ts">
@@ -112,32 +119,63 @@ p{
 }
 
 .card {
-    padding: 3px 10px 0 10px;
+    padding: 10px 50px 10px 50px;
     text-align: center;
     background: -webkit-linear-gradient(75deg, var(--walletcard-bg), var(--walletcard-bg2));
     background: linear-gradient(75deg, var(--walletcard-bg), var(--walletcard-bg2));
     border: 0;
-    border-radius: 0.35rem;
+    border-radius: 0.75rem;
     transition: box-shadow .2s;
-    
+    margin-bottom: 25px;
+
     .card-header {
         border: 0;
         padding: 0;
         background: none;
         margin-top: 10px;
+
+		h5{
+			font-family: Rooster;
+			font-size: 2rem;
+			font-weight: 400;
+		}
     }
 
     .card-body {
         padding: 0.45rem 0;
+
+		.funds-menu{
+			font-family: Rooster;
+			font-size: 2rem;
+			font-weight: 400;
+
+			display: flex;
+			justify-content: space-around;
+			.btn-deposit{
+				margin-left: 15px;
+			}
+			.btn-withdraw{
+				margin-right: 15px;
+			}
+		}
+		// .funds-menu{
+		// 	display: flex;
+		// 	justify-content: space-between;
+		// 	.btn-deposit{
+		// 		margin-left: 15px;
+		// 	}
+		// 	.btn-withdraw{
+		// 		margin-right: 15px;
+		// 	}
+		// }
+
     }
 }
 
 .btn {
-    margin-top: 10px;
     box-shadow: 0.07rem 0.075rem 0.1rem 0.1rem rgba(0, 0, 0, 0.15) !important;
     transition: box-shadow .3s;
-    margin-bottom: 5px;
-    width: 85%;
+	border-radius: .75rem;
     background: -webkit-linear-gradient(75deg, var(--walletcard-btn), var(--walletcard-btn2));
     border: none;
 
@@ -148,15 +186,6 @@ p{
             opacity: 1;
         }
     }
-
-    svg {
-        opacity: 0.7;
-        font-size: 1rem;
-        float: right;
-    }
 }
 
-.btn-secondary{
-	margin-bottom: 15px;
-}
 </style>

@@ -16,20 +16,6 @@
 			</a>
 		</h5>
 
-		<transition name="fade" mode="out-in">
-			<div class="row" v-if="!collapsed">
-				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 wallet-card">
-					<div class="total-amount">
-	
-						<div class="card-body">
-							<h6 class="card-title">Total:  ${{getAdminAccountAmount()}}</h6>
-						</div>
-						
-					</div>
-				</div>
-			</div>
-		</transition>
-
 		<div class="links" :class="{ 'links-full': !collapsed }">
 			<MenuBarLinks description="Overview" to="/" icon="fas fa-home" />
 			<MenuBarLinks description="Users" to="/OverviewUsers" icon="fas fa-users" />
@@ -132,6 +118,8 @@ export default class Menubar extends Vue {
 	float: left;
 	display: flex;
 	flex-direction: column;
+
+
 
 	top: 0;
 	bottom: 0;

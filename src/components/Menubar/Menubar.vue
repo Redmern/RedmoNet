@@ -16,20 +16,6 @@
 			</a>
 		</h5>
 
-		<transition name="fade" mode="out-in">
-			<div class="row" v-if="!collapsed">
-				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 wallet-card">
-					<div class="card">
-	
-						<div class="card-body">
-							<h6 class="card-title">Total:  ${{getAdminAccountAmount()}}</h6>
-						</div>
-						
-					</div>
-				</div>
-			</div>
-		</transition>
-
 		<div class="links" :class="{ 'links-full': !collapsed }">
 			<MenuBarLinks description="Overview" to="/" icon="fas fa-home" />
 			<MenuBarLinks description="Users" to="/OverviewUsers" icon="fas fa-users" />
@@ -69,8 +55,10 @@ import { ref } from "@vue/reactivity";
 
 	methods: {
 		...mapMutations(["ToggleMenubar"]),
+
 		ToggleMenubar(state) {
-		this.$store.commit("ToggleMenubar", this.collapsed);
+			this.$store.commit("ToggleMenubar", this.collapsed);
+			
 		},
 	}
 })
@@ -90,6 +78,10 @@ export default class Menubar extends Vue {
 			return x.value.amount
 		}
 	}
+
+
+
+
 }
 </script>
 
@@ -97,13 +89,13 @@ export default class Menubar extends Vue {
 @import "./src/style/main.scss";
 
 .links-full {
-  left: 15% !important;
+  left: 20% !important;
 }
 
 .links {
   position: absolute;
   top: 35%;
-  left: 20%;
+  left: 25%;
   transition: left 0.4s ease;
 }
 
@@ -128,77 +120,85 @@ export default class Menubar extends Vue {
 }
 
 .menubar {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 1;
-  float: left;
-  display: flex;
-  flex-direction: column;
-  padding: 0.5em;
-  color: white;
-  background-color: var(--menubar-bg);
-  border: 0;
-  border-radius: 0.1rem;
-  border-bottom-left-radius: 0;
-  border-top-left-radius: 0;
-  transition: width 0.5s ease;
+	position: fixed;
+	float: left;
+	display: flex;
+	flex-direction: column;
 
-  @include shadow(var(--item-shadow), var(--item-shadow-hover));
 
-  h5 {
-    margin-top: 10px;
-	margin-bottom: 50px;
-    text-align: center;
-  }
 
-  .full {
-    font-family: Rooster;
-    font-size: 1.7em;
-    border-bottom: 1px white;
-  }
+	top: 0;
+	bottom: 0;
+	left: 0;
+	z-index: 1;
 
-  .abbreviation {
-    font-family: Rooster;
-    font-size: 1.2em;
-    transform: rotate(-20deg);
-  }
+	margin-top: var(--card-gap);
+	margin-bottom: var(--card-gap);
 
-  .rotate-180 {
-    transform: rotate(90deg);
-    transition: 0.4s ease-in-out;
-  }
-  .reverse-180 {
-    transform: rotate(-90deg);
-    transition: 0.4s ease-in-out;
-  }
+	padding: 0.5em;
+	color: white;
+	background-color: var(--menubar-bg);
+	border: 0;
+	border-radius: 0.75rem;
+	border-bottom-left-radius: 0;
+	border-top-left-radius: 0;
+	transition: width 0.5s ease;
 
-  .Toggler {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    height: 50px;
-    transition: 0.5s ease;
+	// @include shadow(var(--item-shadow), var(--item-shadow-hover));
 
-    :hover {
-      color: var(--menubar-item-active);
-    }
+	h5 {
+		margin-top: 10px;
+		margin-bottom: 50px;
+		text-align: center;
+	}
 
-    .collapse-icon {
-      position: absolute;
-      right: 12px;
-      bottom: 0;
-      padding: 0.75em;
-      color: rgb(255, 249, 249);
-      cursor: pointer;
-      user-select: none;
-    }
+	.full {
+		font-family: Rooster;
+		font-weight: 400;
+		font-size: 1.7em;
+		border-bottom: 1px white;
+	}
 
-    .fa-chevron-circle-up {
-      font-size: 1.5rem;
-    }
-  }
+	.abbreviation {
+		font-family: Rooster;
+		font-size: 1.2em;
+		transform: rotate(-20deg);
+	}
+
+	.rotate-180 {
+		transform: rotate(90deg);
+		transition: 0.4s ease-in-out;
+	}
+	.reverse-180 {
+		transform: rotate(-90deg);
+		transition: 0.4s ease-in-out;
+	}
+
+	.Toggler {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		height: 50px;
+		transition: 0.5s ease;
+
+		:hover {
+		color: var(--menubar-item-active);
+		}
+
+		.collapse-icon {
+		position: absolute;
+		right: 12px;
+		bottom: 0;
+		padding: 0.75em;
+		color: rgb(255, 249, 249);
+		cursor: pointer;
+		user-select: none;
+		}
+
+		.fa-chevron-circle-up {
+		font-size: 1.5rem;
+		}
+	}
 }
 
 h5,p{
@@ -206,18 +206,7 @@ h5,p{
     transition: .2s ease-in-out;
 }
 
-.card {
-    padding: 3px 10px 0 10px;
+.total-amount {
     text-align: center;
-    background: -webkit-linear-gradient(75deg, var(--walletcard-bg), var(--walletcard-bg2));
-    background: linear-gradient(75deg, var(--walletcard-bg), var(--walletcard-bg2));
-    border: 0;
-    transition: box-shadow .2s;
-	
-    @include shadow (var(--item-shadow), var(--item-shadow-hover));
-	
-    .card-body {
-        padding: .5rem 0;
-    }
 }
 </style>

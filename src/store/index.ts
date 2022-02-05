@@ -3,7 +3,7 @@ import { createStore } from "vuex";
 export default createStore({
   state: {
     collapsed: false,
-    menubarWidth: '180px'
+    menubarWidth: '240px'
   },
   getters: {
     MenubarWidth(state) {
@@ -16,11 +16,11 @@ export default createStore({
   mutations: {
     ToggleMenubar(state, collapsed){
       if (collapsed) {
-        state.menubarWidth = '180px';
+        state.menubarWidth = '240px';
         state.collapsed = false;
       }
       else{
-        state.menubarWidth = '60px';
+        state.menubarWidth = '80px';
         state.collapsed = true;
       }
     }

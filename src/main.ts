@@ -9,6 +9,8 @@ import { createApolloProvider } from "@vue/apollo-option"
 import { provideApolloClient } from "@vue/apollo-composable";
 import { DefaultApolloClient } from "@vue/apollo-composable";
 
+import gsap from "gsap";
+
 import "bootstrap/dist/css/bootstrap.min.css"
 import "bootstrap"
 
@@ -50,7 +52,7 @@ createApp({
     render(){
         return h(App)
     }
-}).use(store).use(apolloProvider).use(router).mount("#app")
+}).use(store).use(apolloProvider).use(router).use(gsap).mount("#app")
 
 provideApolloClient(apolloClient)
 

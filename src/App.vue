@@ -11,10 +11,6 @@
 					</div>
 				</div>
 
-                <div class="total-amount">
-					<!-- <h6 class="card-title">Total:  ${{getAdminAccountAmount()}}</h6> -->
-				</div>
-
 				<div class="profile-menu">
 					<div class="profile-menu-content">
 						<h6 class="card-title">Total:  ${{getAdminAccountAmount()}}</h6>
@@ -138,38 +134,32 @@ export default class App extends Vue{
 		font-size: 1.25rem;
 	}
 
-	.total-amount{
-		grid-area: header;
-		display: flex;
-		flex-direction: row;
-		flex-wrap: nowrap;
-		align-content: center;
-		justify-content: space-evenly;
-		align-items: center;
-	}
+	// .total-amount{
+	// 	grid-area: header;
+	// 	display: flex;
+	// 	flex-direction: row;
+	// 	flex-wrap: nowrap;
+	// 	align-content: center;
+	// 	justify-content: space-evenly;
+	// 	align-items: center;
+	// }
 
 	.top-menu{
+		grid-area: menu;
 		flex-wrap: nowrap;
 		align-items: center;
-		grid-area: menu;
 		display: flex;
 		justify-content: flex-start;
-		margin-left: 1rem;
-
-		.top-menu-content{
-
-
-		}
-
-		
+		margin-left: 3rem;
 	}
 
 	.profile-menu{
+		grid-area: profile;
 		display: flex;
 		justify-content: flex-end;
     	align-items: center;
 
-		margin-right: 20px;
+		margin-right: 3rem;
 
 		.profile-menu-content{
 			display: flex;

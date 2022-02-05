@@ -1,36 +1,40 @@
 <template>
-	<div class="card">
-
-		<div class="card-header">
-			<h5>{{name}}</h5>
-		</div>
-
-		<div v-if="loading">
+	<div v-if="loading">
 			Loading...
-		</div>
-
-		<div class="card-body">
-
-			<p class="card-title">Funds: ${{amount}}</p>
-			<p class="card-text">Share: {{share}}%</p>
-
-			<!-- <input inputmode="numeric" v-model="Amount" placeholder="Enter amount" /> -->
-			
-
-			<div class="funds-menu">
-				Funds
-			</div>
-
-			<!-- <div class="funds-menu">
-				<a class="btn btn-primary btn-deposit" @click="Deposit(id)"><i class="fas fa-plus" /></a>
-				<a class="btn btn-primary btn-withdraw" @click="Withdraw(id, amount)"><i class="fas fa-minus"/>	</a>
-			</div> -->
-
-		</div>
 	</div>
 
+	<div v-else class="wallet-container">
+		<div class="wallet-content">
 
-	
+			<div class="header" >
+				<p>{{name}}</p>
+			</div>
+
+			<div class="funds-left">
+				<p class="title">Funds </p>
+			</div>
+
+			<div class="funds-right">
+				<p>${{amount}}</p>
+			</div>
+
+			<div class="share-left">
+				<p class="card-text">Share </p>
+			</div>
+
+			<div class="share-right">
+				<p>{{share}}%</p>
+			</div>
+			
+			<div class="deposit">
+				<a class="btn btn-primary btn-deposit" @click="Deposit(id)"><i class="fas fa-plus" /></a>
+			</div>
+			<div class="withdraw">
+				<a class="btn btn-primary btn-withdraw" @click="Withdraw(id, amount)"><i class="fas fa-minus"/>	</a>
+			</div>
+
+		</div>
+	</div>	
 </template>
 
 <script lang="ts">
@@ -108,84 +112,109 @@ export default class WalletCard extends Vue {
 
 @import './src/style/main.scss';
 
-h5,p{
-    color: #FFFFFF;
-    transition: .2s ease-in-out;
-	margin-top: 10px;
-}
+.wallet-container{
+	border-radius: 0.75rem;
+	background: -webkit-linear-gradient(75deg, var(--walletcard-bg), var(--walletcard-bg2));
+	background: linear-gradient(75deg, var(--walletcard-bg), var(--walletcard-bg2));
 
-p{
-	margin-top: 0px;
-}
+	.wallet-content{
 
-.card {
-    padding: 10px 50px 10px 50px;
-    text-align: center;
-    background: -webkit-linear-gradient(75deg, var(--walletcard-bg), var(--walletcard-bg2));
-    background: linear-gradient(75deg, var(--walletcard-bg), var(--walletcard-bg2));
-    border: 0;
-    border-radius: 0.75rem;
-    transition: box-shadow .2s;
-    margin-bottom: 25px;
+		max-height: 275px;
+		// margin-top: 15px;
+		// margin-bottom: 15px;
+		background: inherit;
+		display: grid;
+		grid-template-columns: auto auto;
+		grid-template-rows: auto 13% 13% 35%;
+		gap: 5%;
+		align-items: baseline;
+    	// justify-items: center;
+		justify-content: space-evenly;
+		grid-template-areas: 
+				" header header"
+				" funds-left funds-right"
+				" share-left share-right"
+				" footer-left footer-right"
+		;
 
-    .card-header {
-        border: 0;
-        padding: 0;
-        background: none;
-        margin-top: 10px;
-
-		h5{
-			font-family: Rooster;
-			font-size: 2rem;
-			font-weight: 400;
-		}
-    }
-
-    .card-body {
-        padding: 0.45rem 0;
-
-		.funds-menu{
-			font-family: Rooster;
-			font-size: 2rem;
-			font-weight: 400;
-
+		.header{
+			margin-top: 15px;
+			grid-area: header;
+			border-bottom: 1px white;
 			display: flex;
-			justify-content: space-around;
-			.btn-deposit{
-				margin-left: 15px;
-			}
-			.btn-withdraw{
-				margin-right: 15px;
+    		justify-content: center;
+			border-bottom: 1px solid whitesmoke;
+
+			p{
+				padding-left: 5px;
+				font-family: Rooster;
+				font-size: 2.3rem;
+				font-weight: 400;
+				margin-bottom: 5px;
 			}
 		}
-		// .funds-menu{
-		// 	display: flex;
-		// 	justify-content: space-between;
-		// 	.btn-deposit{
-		// 		margin-left: 15px;
-		// 	}
-		// 	.btn-withdraw{
-		// 		margin-right: 15px;
-		// 	}
-		// }
 
-    }
+		.funds-left{
+			grid-area: funds-left;
+			padding-top: 30px;
+
+			p{
+				padding-left: 5px;
+				font-family: Rooster;
+				font-size: 1.75rem;
+				font-weight: 400;
+			}
+		}
+		.funds-right{
+			
+			grid-area: funds-right;
+		}
+		
+		.share-left{
+			grid-area: share-left;
+			padding-top: 15px;
+			p{
+				padding-left: 5px;
+				font-family: Rooster;
+				font-size: 1.75rem;
+				font-weight: 400;
+			}
+		}
+		.share-right{
+			grid-area: share-right;
+		}
+
+		.deposit{
+			grid-area: footer-left;
+			border-radius: 0.75rem;
+			padding-top: 30px ;
+		}
+		.withdraw{
+			grid-area: footer-right;
+			border-radius: 0.75rem;
+		}
+
+
+	}
+
+	.btn {
+		box-shadow: 0.07rem 0.075rem 0.1rem 0.1rem rgba(0, 0, 0, 0.15) !important;
+		width: 50px;
+		transition: box-shadow .3s;
+		border-radius: .75rem;
+		background: -webkit-linear-gradient(75deg, var(--walletcard-btn), var(--walletcard-btn2));
+		border: none;
+
+		@include hover-focus {
+			box-shadow: 0.07rem 0.075rem 0.3rem 0.1rem rgba(0, 0, 0, 0.25) !important;
+			background: -webkit-linear-gradient(75deg, var(--walletcard-btn-hover), var(--walletcard-btn-hover2));
+			svg {
+				opacity: 1;
+			}
+		}
+	}
 }
 
-.btn {
-    box-shadow: 0.07rem 0.075rem 0.1rem 0.1rem rgba(0, 0, 0, 0.15) !important;
-    transition: box-shadow .3s;
-	border-radius: .75rem;
-    background: -webkit-linear-gradient(75deg, var(--walletcard-btn), var(--walletcard-btn2));
-    border: none;
 
-    @include hover-focus {
-        box-shadow: 0.07rem 0.075rem 0.3rem 0.1rem rgba(0, 0, 0, 0.25) !important;
-        background: -webkit-linear-gradient(75deg, var(--walletcard-btn-hover), var(--walletcard-btn-hover2));
-        svg {
-            opacity: 1;
-        }
-    }
-}
 
 </style>

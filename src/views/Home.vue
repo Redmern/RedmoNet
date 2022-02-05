@@ -1,7 +1,7 @@
 <template>
 
 	<div class="wrapper">
-		<div class=" wallet-container">
+		<div class=" container">
 			<p v-if="isGetUserAccountsQueryLoading">Loading...</p>
 		
 			<div v-else v-for="userAccount in userAccounts" :key="userAccount.id">
@@ -61,11 +61,11 @@ export default class OverviewUsers extends Vue{
 	padding: 100px 100px 25px 75px;
 }
 
-.wallet-container{
+.container{
 	display: grid;
 	grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
 	justify-content: space-around;
-	gap: 1.5rem;
+	gap: 1.75rem;
 	
 }
 

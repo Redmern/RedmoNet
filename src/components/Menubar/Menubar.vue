@@ -55,8 +55,10 @@ import { ref } from "@vue/reactivity";
 
 	methods: {
 		...mapMutations(["ToggleMenubar"]),
+
 		ToggleMenubar(state) {
-		this.$store.commit("ToggleMenubar", this.collapsed);
+			this.$store.commit("ToggleMenubar", this.collapsed);
+			
 		},
 	}
 })
@@ -76,6 +78,10 @@ export default class Menubar extends Vue {
 			return x.value.amount
 		}
 	}
+
+
+
+
 }
 </script>
 
@@ -148,6 +154,7 @@ export default class Menubar extends Vue {
 
 	.full {
 		font-family: Rooster;
+		font-weight: 400;
 		font-size: 1.7em;
 		border-bottom: 1px white;
 	}

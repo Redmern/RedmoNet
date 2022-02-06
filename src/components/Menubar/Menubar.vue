@@ -1,20 +1,18 @@
 <template>
 	<div class="menubar" :style="{ width: menubarWidth }">
-		<h5>
-			<a>
-				<transition name="fade" mode="out-in">
+		<div class="logo">
 
-					<span :class="{ full: !collapsed }" v-if="!collapsed"> RedmoNet </span>
+			<div class="fullWrapper" ref="fullWrapper">
+				<p class="full" ref="full"> RedmoNet </p>
+			</div>	
 
-					<span class="abbreviation" v-else>
-						<div class="abbreviation">R</div>
-						<div class="abbreviation">M</div>
-						<div class="abbreviation">N</div>
-					</span>
+			<div class="abbWrapper" ref="abbWrapper">
+				<p class="abb1" ref="abb1">R</p>
+				<p class="abb2" ref="abb2">M</p>
+				<p class="abb3" ref="abb3">N</p>
+			</div>
 
-				</transition>
-			</a>
-		</h5>
+		</div>
 
 		<div class="links" :class="{ 'links-full': !collapsed }">
 			<MenuBarLinks description="Overview" to="/" icon="fas fa-home" />
@@ -42,10 +40,20 @@ import { Options, Vue } from "vue-class-component";
 import { GetUserAccountsQuery } from "@/graphql/userAccountQuerries"
 import { useQuery, useResult } from "@vue/apollo-composable";
 import { ref } from "@vue/reactivity";
+import gsap from "gsap";
 
 @Options({
 	components: {
 		MenuBarLinks,
+	},
+
+	mounted () {
+		this.first = true;
+		this.tl = gsap.timeline({ defaults:{ duration: 0.3, reversed: false, ease: "power4.inOut" }})
+			.to('.fullWrapper', { opacity:0},'-=.1')
+			.to('.fullWrapper', {height: '0%'}, '-=.1')
+			.to('.abbWrapper', {width: '100%', opacity:1 },'-=0.1').paused(true);
+			
 	},
 
 	computed: {
@@ -56,14 +64,26 @@ import { ref } from "@vue/reactivity";
 	methods: {
 		...mapMutations(["ToggleMenubar"]),
 
+		StartAnimation: function(){
+			if (this.first) {
+				this.first = false
+				this.tl.resume()
+				this.tl.play()
+				return
+			}
+			this.tl.reversed() ? this.tl.play() : this.tl.reverse();
+		},
+
 		ToggleMenubar(state) {
 			this.$store.commit("ToggleMenubar", this.collapsed);
-			
+			this.StartAnimation()			
 		},
 	}
 })
 
 export default class Menubar extends Vue {
+
+
 
 	resultGetAdminAccountQuery = useQuery(GetUserAccountsQuery)
 
@@ -99,25 +119,25 @@ export default class Menubar extends Vue {
   transition: left 0.4s ease;
 }
 
-.fade-enter-active {
-  transition: all 0.4s cubic-bezier(0.42, -0.1, 0.24, 0.39);
-}
-.fade-leave-active {
-  transition: all 0.1s cubic-bezier(0.57, 0.08, 0, 0.25);
-}
+// .fade-enter-active {
+//   transition: all 0.4s cubic-bezier(0.42, -0.1, 0.24, 0.39);
+// }
+// .fade-leave-active {
+//   transition: all 0.1s cubic-bezier(0.57, 0.08, 0, 0.25);
+// }
 
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
-}
+// .fade-enter-from,
+// .fade-leave-to {
+//   opacity: 0;
+// }
 
-.fade-enter {
-  opacity: 0;
-}
+// .fade-enter {
+//   opacity: 0;
+// }
 
-.fade-leave-to {
-  opacity: 0;
-}
+// .fade-leave-to {
+//   opacity: 0;
+// }
 
 .menubar {
 	position: fixed;
@@ -146,23 +166,44 @@ export default class Menubar extends Vue {
 
 	// @include shadow(var(--item-shadow), var(--item-shadow-hover));
 
-	h5 {
-		margin-top: 10px;
-		margin-bottom: 50px;
+	.hidden{
+		display: none;
+	}
+
+	.logo {
 		text-align: center;
 	}
 
-	.full {
-		font-family: Rooster;
-		font-weight: 400;
-		font-size: 1.7em;
-		border-bottom: 1px white;
+	.fullWrapper{
+		display: inline-block;
+		margin-top: 5px;
+
+		.full {
+			font-family: Abril_Fatface;
+			font-weight: 600;
+			font-size: 2.5rem;
+			padding-left: 15px;
+			padding-right: 15px;
+		}
 	}
 
-	.abbreviation {
-		font-family: Rooster;
-		font-size: 1.2em;
-		transform: rotate(-20deg);
+	
+
+	.abbWrapper {
+		opacity: 0;
+		p{
+			font-family: Abril_Fatface;
+			font-size: 1.5rem;			
+			font-weight: 400;
+			transform: rotate(-20deg);
+			margin-bottom: 5px;
+		}
+	}
+
+
+	.abb2, 
+	.abb3 {
+		margin-top: -11px;
 	}
 
 	.rotate-180 {

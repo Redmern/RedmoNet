@@ -11,19 +11,19 @@
 			</div>
 
 			<div class="funds-left">
-				<p class="title">Funds </p>
+				<p class="title">Funds :</p>
 			</div>
 
 			<div class="funds-right">
-				<p>${{amount}}</p>
+				<p class="title">${{amount}}</p>
 			</div>
 
 			<div class="share-left">
-				<p class="card-text">Share </p>
+				<p class="title">Share :</p>
 			</div>
 
 			<div class="share-right">
-				<p>{{share}}%</p>
+				<p class="title">{{share}}%</p>
 			</div>
 			
 			<div class="deposit">
@@ -120,16 +120,15 @@ export default class WalletCard extends Vue {
 	.wallet-content{
 
 		max-height: 275px;
-		// margin-top: 15px;
-		// margin-bottom: 15px;
 		background: inherit;
+
 		display: grid;
 		grid-template-columns: auto auto;
 		grid-template-rows: auto 13% 13% 35%;
 		gap: 5%;
 		align-items: baseline;
-    	// justify-items: center;
 		justify-content: space-evenly;
+
 		grid-template-areas: 
 				" header header"
 				" funds-left funds-right"
@@ -142,16 +141,22 @@ export default class WalletCard extends Vue {
 			grid-area: header;
 			border-bottom: 1px white;
 			display: flex;
-    		justify-content: center;
+			flex-direction: column;
+    		align-items: center;
 			border-bottom: 1px solid whitesmoke;
-
+			
 			p{
 				padding-left: 5px;
-				font-family: Rooster;
+				padding-right: 5px;
 				font-size: 2.3rem;
-				font-weight: 400;
+				font-weight: 600;
 				margin-bottom: 5px;
 			}
+		}
+
+		.title{
+			font-size: 1.5rem;
+			font-weight: 400;
 		}
 
 		.funds-left{
@@ -160,8 +165,6 @@ export default class WalletCard extends Vue {
 
 			p{
 				padding-left: 5px;
-				font-family: Rooster;
-				font-size: 1.75rem;
 				font-weight: 400;
 			}
 		}
@@ -175,8 +178,6 @@ export default class WalletCard extends Vue {
 			padding-top: 15px;
 			p{
 				padding-left: 5px;
-				font-family: Rooster;
-				font-size: 1.75rem;
 				font-weight: 400;
 			}
 		}

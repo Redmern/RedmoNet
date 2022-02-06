@@ -1,6 +1,6 @@
 <template>
-
-	<div class="wrapper">
+<div></div>
+	<!-- <div class="wrapper">
 		<div class=" container">
 			<p v-if="isGetUserAccountsQueryLoading">Loading...</p>
 		
@@ -8,23 +8,7 @@
 				<WalletCard :id="userAccount.id" :name="userAccount.name" :amount="userAccount.amount" :share="userAccount.share "/>
 			</div>
 		</div>
-	</div>
-
-
-	<!-- <div class=" wallet-container">
-		<p v-if="isGetUserAccountsQueryLoading">Loading...</p>
-	
-		<div v-else>
-			<div class="row">
-				
-				<div v-for="userAccount in userAccounts" :key="userAccount.id" class="col-lg-3 col-md-4 col-sm-6 col-xs-12 wallet-card">
-					<WalletCard :id="userAccount.id" :name="userAccount.name" :amount="userAccount.amount" :share="userAccount.share "/>
-				</div>
-	
-			</div>
-		</div>
 	</div> -->
-
 
 </template>
 
@@ -58,14 +42,14 @@ export default class OverviewUsers extends Vue{
 <style scoped lang="scss">
 
 .wrapper{
-	padding: 100px 100px 25px 75px;
+	padding: 100px 50px 25px 50px;
 }
 
 .container{
 	display: grid;
 	grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
 	justify-content: space-around;
-	gap: 1.75rem;
+	gap: 3rem;
 	
 }
 

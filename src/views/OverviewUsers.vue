@@ -1,22 +1,13 @@
 <template>
-        <div class="container overview">
-            <div class="card main-card">
-                <section class="food-cards-overview">
+    <div class="wrapper">
 
-                    <p v-if="isGetUserAccountsQueryLoading">Loading...</p>
-
-                    <div v-else>
-                        <div class="row">
-                            
-                            <div v-for="userAccount in userAccounts" :key="userAccount.id" class="col-lg-3 col-md-4 col-sm-6 col-xs-12 wallet-card">
-                                <WalletCard :id="userAccount.id" :name="userAccount.name" :amount="userAccount.amount" :share="userAccount.share "/>
-                            </div>
-
-                        </div>
-                    </div>
-                </section>
-            </div>
-        </div>   
+        <p v-if="isGetUserAccountsQueryLoading">Loading...</p>
+    
+        <div v-else v-for="userAccount in userAccounts" :key="userAccount.id">
+            <WalletCard :id="userAccount.id" :name="userAccount.name" :amount="userAccount.amount" :share="userAccount.share "/>
+        </div>
+        
+    </div>
 </template>
 
 <script lang="ts">
@@ -24,7 +15,7 @@
 import { Options, Vue } from "vue-class-component";
 
 
-import { GetUserAccountsQuery , GetAdminAccountQuery} from "@/graphql/userAccountQuerries"
+import { GetUserAccountsQuery } from "@/graphql/userAccountQuerries"
 import { useQuery, useResult } from "@vue/apollo-composable";
 
 import WalletCard from "@/components/WalletCard.vue"; 
@@ -44,22 +35,26 @@ export default class OverviewUsers extends Vue{
 	userAccounts = useResult(this.resultGetUserAccountsQuery.result, null, data => data.userAccounts)
 
 }
-
 </script>
 
-<style lang="scss">
-.container {
-    max-width: 100%;
+<style scoped lang="scss">
+
+.wrapper{
+	padding: 100px 100px 25px 100px;
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+	justify-content: space-around;
+	gap: 3rem;
+	margin:auto;
 }
 
-.main-card {
-    padding: 2em 1em 1em 1em;
-    transition: margin-left .5s;
-    border: none;
-}
-
-.wallet-card{
-    margin-bottom: 25px;
+.container{
+    padding: 100px 50px 25px 50px;
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+	justify-content: space-around;
+	gap: 3rem;
+	margin:auto;
 }
 
 </style> 

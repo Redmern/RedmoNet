@@ -31,10 +31,10 @@ export default {
 
 
 .fade-enter-active{
-    transition: all 0.6s cubic-bezier(.42,-0.1,.24,.39);
+    transition: all 0.4s ease;
 }
 .fade-leave-active{
-    transition: all 0.1s cubic-bezier(.14,.45,.15,.03);
+    transition: all 0.1s ease;
     // animation-duration: 0.2;
 }
 
@@ -58,7 +58,6 @@ export default {
 
     cursor: pointer;
     position: relative;
-    font-weight: 400;
     user-select: none;
 
     margin: 2em 0;
@@ -74,8 +73,9 @@ export default {
         margin-top: auto;
         margin-bottom: auto;
         margin-left:50px ;
-        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-        font-size: 1rem;
+        
+        font-weight: 400;
+        font-size: 1.5rem;
     }
 }
 
@@ -93,10 +93,6 @@ export default {
 .link:hover{
     // background-color: var(--menubar-item-hover);
     color: var(--menubar-item-hover);
-}
-
-.link:active{
-    background-color: var(--menubar-item-active);
 }
 
 a.router-link-active{

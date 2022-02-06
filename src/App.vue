@@ -5,15 +5,19 @@
             <div class="top content">
 
 				<div class="top-menu">
-					<div class="top-menu-content">
+
+					<div>
 						<i class="fas fa-user-plus" />
-						<i class="fas fa-folder-plus" />
 					</div>
+					<div>
+						<i class="fas fa-folder-plus" />
+					</div>	
+
 				</div>
 
 				<div class="profile-menu">
 					<div class="profile-menu-content">
-						<h6 class="card-title">Total:  ${{getAdminAccountAmount()}}</h6>
+						<h6>Total:  ${{getAdminAccountAmount()}}</h6>
 						<i class="fas fa-user-circle" />
 					</div>
 				</div>
@@ -81,7 +85,7 @@ export default class App extends Vue{
     overflow: hidden;
     
     * {
-        font-family: 'MyWebFont', sans-serif;
+        font-family: Teko;
         font-weight: 600;
     }
 }
@@ -151,6 +155,10 @@ export default class App extends Vue{
 		display: flex;
 		justify-content: flex-start;
 		margin-left: 3rem;
+
+		svg:hover{
+			color: var(--menubar-item-hover);
+		}
 	}
 
 	.profile-menu{
@@ -164,9 +172,16 @@ export default class App extends Vue{
 		.profile-menu-content{
 			display: flex;
     		flex-direction: row;
+			align-items: center;
+			h6{
+				margin-right: 25px;
+				font-size: 1.5rem;
+				margin-bottom: 0;
+			}
 
 			svg{
 				margin-left: 20px;
+				font-size: 2rem;
 			}
 		}
 		
@@ -200,9 +215,9 @@ body {
     left: 180px;
 }
 
-.page{
-    background: var(--background-bg);
-}
+// .page{
+//     background: var(--background-bg);
+// }
 
 .fade-enter-to,
 .fade-leave-to{

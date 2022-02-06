@@ -1,13 +1,22 @@
 <template>
-  <div class="container overview">
-    <div class="card main-card">
+	<!-- <div class="top-menu">
+
+		<div>
+			<i class="fas fa-user-plus" />
+			<input v-model="Name" type="text" placeholder="Enter Name" />
+		</div>
+		<div>
+			<i class="fas fa-folder-plus" />
+			<input v-model="Name" type="text" placeholder="Enter Name" />
+		</div>	
+
+	</div> -->
+
       <section class="food-cards-overview">
         <div class="row">
           <AddUserForm />
         </div>
       </section>
-    </div>
-  </div>
 </template>
 
 <script lang="ts">

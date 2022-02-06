@@ -8,9 +8,11 @@
 
 					<div>
 						<i class="fas fa-user-plus" />
+						<input v-model="Name" type="text" placeholder="Enter Name" />
 					</div>
 					<div>
 						<i class="fas fa-folder-plus" />
+						<input v-model="Name" type="text" placeholder="Enter Name" />
 					</div>	
 
 				</div>
@@ -58,6 +60,8 @@ import { ref } from "@vue/reactivity";
 
 export default class App extends Vue{
     
+	Name = ""
+
     resultGetAdminAccountQuery = useQuery(GetUserAccountsQuery)
 
 	isGetUserAccountsQueryLoading = this.resultGetAdminAccountQuery.loading
@@ -111,8 +115,6 @@ export default class App extends Vue{
 	;
 }
 
-
-
 .content{
 	max-width: 100%;
     min-height: 100%;
@@ -158,6 +160,10 @@ export default class App extends Vue{
 
 		svg:hover{
 			color: var(--menubar-item-hover);
+		}
+
+		input{
+			display: none;
 		}
 	}
 

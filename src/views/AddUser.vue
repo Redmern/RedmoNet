@@ -1,5 +1,5 @@
 <template>
-	<!-- <div class="top-menu">
+	<div class="top-menu">
 
 		<div>
 			<i class="fas fa-user-plus" />
@@ -10,13 +10,13 @@
 			<input v-model="Name" type="text" placeholder="Enter Name" />
 		</div>	
 
-	</div> -->
+	</div>
 
-      <section class="food-cards-overview">
+      <!-- <section class="food-cards-overview">
         <div class="row">
           <AddUserForm />
         </div>
-      </section>
+      </section> -->
 </template>
 
 <script lang="ts">

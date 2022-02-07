@@ -6,14 +6,39 @@
 
 				<div class="top-menu">
 
-					<div>
+					<div @click="ShowUserForm()">
 						<i class="fas fa-user-plus" />
-						<input v-model="Name" type="text" placeholder="Enter Name" />
 					</div>
-					<div>
+					<div @click="ShowWalletForm()">
 						<i class="fas fa-folder-plus" />
-						<input v-model="Name" type="text" placeholder="Enter Name" />
 					</div>	
+
+					<div :class="{'showuserform' : !showUserForm}" class="form">
+						<div class="formwrapper">
+
+							<div class="header">
+								<h4>New User</h4>
+							</div>
+
+							<div class="description">
+								<p>Enter Name</p>
+								<p>Enter Funds</p>
+								
+							</div>
+
+							<div class="input">
+								<input v-model="Name" type="text" placeholder="Enter Name" />
+								<input v-model="Name" type="text" placeholder="Enter Initial funds" />
+							</div>
+	
+							<div class="buttons">
+								<button class="btn btn-secondary"><p class="buttontext">Create</p></button>
+								<button class="btn btn-secondary" @click="showUserForm = !showUserForm"><p class="buttontext">Cancel</p></button>
+							</div>
+
+						</div>
+					</div>
+
 
 				</div>
 
@@ -50,17 +75,26 @@ import { useQuery, useResult } from "@vue/apollo-composable";
 import { ref } from "@vue/reactivity";
 
 @Options({
-  components: {
-    Menubar,
-  },
-  computed:{
-        ...mapState(['menubarWidth'])
-    },
+	components: {
+		Menubar,
+	},
+	computed:{
+			...mapState(['menubarWidth'])
+	},
+	methods:{
+		ShowUserForm(){
+			this.showUserForm = !this.showUserForm
+		}
+	}			
 })
 
 export default class App extends Vue{
     
 	Name = ""
+
+	showUserForm = true
+
+	showWalletForm = true
 
     resultGetAdminAccountQuery = useQuery(GetUserAccountsQuery)
 
@@ -90,8 +124,93 @@ export default class App extends Vue{
     
     * {
         font-family: Teko;
-        font-weight: 600;
+        font-weight: 400;
     }
+}
+
+.showuserform{
+	z-index: 999!important;
+	opacity: 1!important;
+}
+
+.form{
+	z-index: -1;
+	position: absolute;
+	width: 20vw;
+	height: 25vh;
+	border-radius: .75rem;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+	opacity: 0;
+	background-color: var(--background-bg2);
+	box-shadow: 0 0 0 100vw rgba(0,0,0,.4);
+
+	.formwrapper{
+		height: 100%;
+		width: 100%;
+		padding: 25px 45px 25px 50px;
+		display: grid;
+		grid-template-columns: auto auto;
+		gap: 5%;
+		grid-template-areas: 
+			"header header"
+			"description input"
+			"buttons buttons"
+		;
+
+		.header{
+			grid-area: header;
+			width: 100%;
+			display: flex;
+    		align-items: center;
+			padding-left: 5px;
+			border-bottom: 1px solid #5c5b509a;
+		}
+
+		.description{
+			grid-area: description;
+			padding-left: 5px;
+			margin-top: 5px;
+			:first-child{
+				margin-bottom: 20px;
+				
+			}
+		}
+
+		.input{
+			display: flex;
+    		flex-direction: column;
+			// width: 10rem;
+			:first-child{
+				margin-bottom: 15px;
+			}
+			input{
+				margin-top: 5px;
+			}
+		}
+
+		.buttons{
+			grid-area: buttons;
+			padding: 5px 0px 5px 5px; 
+			display: flex;
+			justify-content: flex-end;
+
+			:first-child{
+				margin-right: 1rem;
+			}
+
+			.buttontext{
+				margin: 0px;
+			}
+
+			button{
+				max-height: 35px;
+				background-color: var(--button);
+				border: none;
+			}
+		}
+	}
 }
 
 .grid-container {
@@ -156,14 +275,10 @@ export default class App extends Vue{
 		align-items: center;
 		display: flex;
 		justify-content: flex-start;
-		margin-left: 3rem;
+		margin-left: 6rem;
 
 		svg:hover{
-			color: var(--menubar-item-hover);
-		}
-
-		input{
-			display: none;
+			color: var(--button);
 		}
 	}
 
@@ -179,6 +294,7 @@ export default class App extends Vue{
 			display: flex;
     		flex-direction: row;
 			align-items: center;
+
 			h6{
 				margin-right: 25px;
 				font-size: 1.5rem;

@@ -223,7 +223,7 @@ export default class Menubar extends Vue {
 		transition: 0.5s ease;
 
 		:hover {
-		color: var(--menubar-item-active);
+		color: var(--button);
 		}
 
 		.collapse-icon {

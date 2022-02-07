@@ -15,7 +15,7 @@
 			</div>
 
 			<div class="funds-right">
-				<p class="title">${{amount}}</p>
+				<p class="title">$ {{amount}}</p>
 			</div>
 
 			<div class="share-left">
@@ -23,14 +23,15 @@
 			</div>
 
 			<div class="share-right">
-				<p class="title">{{share}}%</p>
+				<p class="title">{{share}} %</p>
 			</div>
 			
+
 			<div class="deposit">
-				<a class="btn btn-primary btn-deposit" @click="Deposit(id)"><i class="fas fa-plus" /></a>
+				<a class="btn btn-primary btn-deposit" @click="Deposit(id)">Funds</a>
 			</div>
 			<div class="withdraw">
-				<a class="btn btn-primary btn-withdraw" @click="Withdraw(id, amount)"><i class="fas fa-minus"/>	</a>
+				<a class="btn btn-primary btn-withdraw" @click="Withdraw(id, amount)">Edit</a>
 			</div>
 
 		</div>
@@ -143,7 +144,7 @@ export default class WalletCard extends Vue {
 			display: flex;
 			flex-direction: column;
     		align-items: center;
-			border-bottom: 1px solid whitesmoke;
+			border-bottom: 1px solid #5c5b509a;
 			
 			p{
 				padding-left: 5px;
@@ -187,12 +188,14 @@ export default class WalletCard extends Vue {
 
 		.deposit{
 			grid-area: footer-left;
-			border-radius: 0.75rem;
-			padding-top: 30px ;
+			padding-top: 30px;
+			display: flex;
+    		justify-content: flex-start;
 		}
 		.withdraw{
 			grid-area: footer-right;
-			border-radius: 0.75rem;
+			display: flex;
+    		justify-content: flex-end;
 		}
 
 
@@ -200,10 +203,11 @@ export default class WalletCard extends Vue {
 
 	.btn {
 		box-shadow: 0.07rem 0.075rem 0.1rem 0.1rem rgba(0, 0, 0, 0.15) !important;
-		width: 50px;
+		width: 55px;
+		height: 35px;
 		transition: box-shadow .3s;
-		border-radius: .75rem;
-		background: -webkit-linear-gradient(75deg, var(--walletcard-btn), var(--walletcard-btn2));
+		border-radius: .25rem;
+		background: var(--button);
 		border: none;
 
 		@include hover-focus {

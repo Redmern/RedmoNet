@@ -83,8 +83,6 @@ import gsap from "gsap";
 
 export default class Menubar extends Vue {
 
-
-
 	resultGetAdminAccountQuery = useQuery(GetUserAccountsQuery)
 
 	isGetUserAccountsQueryLoading = this.resultGetAdminAccountQuery.loading
@@ -98,11 +96,8 @@ export default class Menubar extends Vue {
 			return x.value.amount
 		}
 	}
-
-
-
-
 }
+
 </script>
 
 <style scoped lang="scss">
@@ -144,8 +139,6 @@ export default class Menubar extends Vue {
 	float: left;
 	display: flex;
 	flex-direction: column;
-
-
 
 	top: 0;
 	bottom: 0;

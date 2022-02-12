@@ -1,8 +1,8 @@
 import { gql } from "@apollo/client/core";
 
 export const AddUserAccountMutation = gql`
-  mutation addUserAccount($name: String!) {
-		addUserAccount(name: $name) {
+  mutation addUserAccount($name: String!, $amount: Float) {
+		addUserAccount(name: $name, amount: $amount) {
 			name
 			id
 			amount

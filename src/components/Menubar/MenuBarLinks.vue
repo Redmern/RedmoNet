@@ -97,7 +97,7 @@ export default {
 
 a.router-link-active{
     // border-bottom: 1px solid var(--menubar-item-active);
-    color: var(--button);
+    color: var(--button-active);
 }
 
 a.router-link-hover{

@@ -4,7 +4,7 @@
         <p v-if="isGetUserAccountsQueryLoading">Loading...</p>
     
         <div v-else v-for="userAccount in userAccounts" :key="userAccount.id">
-            <WalletCard :id="userAccount.id" :name="userAccount.name" :amount="userAccount.amount" :share="userAccount.share "/>
+            <WalletCard :id="userAccount.id" :name="userAccount.name" :amount="userAccount.amount" :share="userAccount.share"/>
         </div>
         
     </div>
@@ -38,6 +38,10 @@ export default class OverviewUsers extends Vue{
 </script>
 
 <style scoped lang="scss">
+
+.wallet-main{
+	// z-index: -1;
+}
 
 .wrapper{
 	padding: 100px 100px 25px 100px;

@@ -3,7 +3,7 @@
 			Loading...
 	</div>
 
-	<div v-else class="wallet-container">
+	<div v-else class="wallet-container" :ref="Id">
 		<div class="wallet-content">
 
 			<div class="front">
@@ -29,7 +29,7 @@
 				
 	
 				<div class="deposit">
-					<a class="btn btn-primary btn-deposit" @click="Deposit(id)">Funds</a>
+					<a class="btn btn-primary btn-deposit" @click="ShowFundsCard(id)">Funds</a>
 				</div>
 				<div class="withdraw">
 					<a class="btn btn-primary btn-withdraw" @click="Withdraw(id, amount)">Edit</a>
@@ -51,6 +51,7 @@
 import { Options, Vue } from "vue-class-component";
 import { useMutation } from '@vue/apollo-composable'
 import { AddFundsToUserAccountMutation} from '@/graphql/userAccountMutations'
+
 import gsap from "gsap"
 import gsapCSS from "gsap/CSSPlugin"; 
 
@@ -59,21 +60,45 @@ import gsapCSS from "gsap/CSSPlugin";
 		name: String, 
 		amount: Number,
 		share: Number,
-		id: String
+		id: String,
 	},
 	mounted () {
-
+		this.Id = this.id
 		gsap.set('.back', {rotationY:-180})
+		gsap.set(".wallet-container", {transformStyle: "preserve-3d",transformPerspective: 1000});
+		gsap.set(".wallet-container", {transformStyle: "preserve-3d",transformOrigin: "50% 50%"});
 
-		this.tl = gsap.timeline({ defaults:{ duration: 1, reversed: false, ease: "power4" }})
-			.to('.wallet-container', {rotationY:-180})
-			// .to('.back', {rotationY:0},0)
-			.to('.wallet-container', .5, {z:50},0)
-			.to('.wallet-container', .5, {z:0},.5);
+		this.fundsFirst = true
+		this.tlFunds = gsap.timeline({ defaults:{ duration: .8, ease: "none" }})
 	},
+	methods: {
+		ShowFundsCard(id){
+
+			const walletContainer = this.$refs[id]
+
+			console.log(this.div);
+			
+
+			if (this.fundsFirst) {
+				this.tlFunds
+					.to(walletContainer, {rotationY:-180})
+					.to('.front', { opacity: 0}, '-=0.8')
+					// .to('.back', {rotationY:0},0)
+					// .to(walletContainer,{z:100})
+					// .to(walletContainer,{z:0})
+
+				this.fundsFirst = false
+				 return
+			}
+
+			this.tlFunds.reversed() ? this.tlFunds.play() : this.tlFunds.reverse();
+		}
+	}
 })
 
 export default class WalletCard extends Vue {
+
+	Id = null
 
   	Amount = ""
 
@@ -138,7 +163,6 @@ export default class WalletCard extends Vue {
 	border-radius: 0.75rem;
 	background: -webkit-linear-gradient(75deg, var(--walletcard-bg), var(--walletcard-bg2));
 	background: linear-gradient(75deg, var(--walletcard-bg), var(--walletcard-bg2));
-
 	@include hover-focus {
 		.header::after {
 			content: '';
@@ -148,6 +172,8 @@ export default class WalletCard extends Vue {
 	}
 
 	.wallet-content{
+		-webkit-backface-visibility: hidden;
+		backface-visibility: hidden;
 
 		.back{
 			

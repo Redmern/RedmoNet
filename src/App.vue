@@ -57,9 +57,7 @@ import gsap from "gsap";
 @Options({
 	mounted () {
 		this.first = true;
-		this.tl = gsap.timeline({ defaults:{ duration: 0.2, reversed: false, ease: "power4.outIn" }})
-			.to('.form', { opacity:1, zIndex: 999})
-			.paused(true);
+		this.tl = gsap.timeline({ defaults:{ duration: .2, reversed: false, ease: "power1" }})
 	},
 
 	components: {
@@ -75,11 +73,13 @@ import gsap from "gsap";
 
 		ToggleAddUserForm() {
 			if (this.first) {
-				this.first = false
-				this.tl.resume()
-				this.tl.play()
+				this.tl
+					.to('.form', { opacity:1, zIndex: 999})
+					
+					this.first = false
 				return
-			}			
+			}
+
 			this.tl.reversed() ? this.tl.play() : this.tl.reverse();
 		},
 	}			

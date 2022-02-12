@@ -6,20 +6,23 @@
 
 				<div class="top-menu">
 
-					<div>
+					<div @click="ToggleAddUserForm">
 						<i class="fas fa-user-plus" />
-						<input v-model="Name" type="text" placeholder="Enter Name" />
 					</div>
-					<div>
+					<div @click="ShowWalletForm()">
 						<i class="fas fa-folder-plus" />
-						<input v-model="Name" type="text" placeholder="Enter Name" />
 					</div>	
+
+					<AddUserForm :tl="this.tl"/>
+
+					<!-- <AddWalletForm :class="{ 'showuserform' : showAddUserForm }"/> -->
 
 				</div>
 
 				<div class="profile-menu">
 					<div class="profile-menu-content">
-						<h6>Total:  ${{getAdminAccountAmount()}}</h6>
+						<h6>Total:</h6>
+						<h6>${{getAdminAccountAmount()}}</h6>
 						<i class="fas fa-user-circle" />
 					</div>
 				</div>
@@ -41,21 +44,45 @@
 
 <script lang="ts">
 
-import {mapState} from 'vuex'
+import {mapState,mapMutations} from 'vuex'
 import Menubar from "@/components/Menubar/Menubar.vue";
+import AddUserForm from "@/components/Forms/AddUserForm.vue"
 import { Options, Vue } from "vue-class-component";
 
 import { GetUserAccountsQuery } from "@/graphql/userAccountQuerries"
 import { useQuery, useResult } from "@vue/apollo-composable";
 import { ref } from "@vue/reactivity";
+import gsap from "gsap";
 
 @Options({
-  components: {
-    Menubar,
-  },
-  computed:{
-        ...mapState(['menubarWidth'])
-    },
+	mounted () {
+		this.first = true;
+		this.tl = gsap.timeline({ defaults:{ duration: 0.2, reversed: false, ease: "power4.outIn" }})
+			.to('.form', { opacity:1, zIndex: 999})
+			.paused(true);
+	},
+
+	components: {
+		Menubar,
+		AddUserForm,
+	},
+
+	computed:{
+		...mapState(['menubarWidth']),
+	},
+
+	methods:{
+
+		ToggleAddUserForm() {
+			if (this.first) {
+				this.first = false
+				this.tl.resume()
+				this.tl.play()
+				return
+			}			
+			this.tl.reversed() ? this.tl.play() : this.tl.reverse();
+		},
+	}			
 })
 
 export default class App extends Vue{
@@ -90,7 +117,7 @@ export default class App extends Vue{
     
     * {
         font-family: Teko;
-        font-weight: 600;
+        font-weight: 400;
     }
 }
 
@@ -156,20 +183,16 @@ export default class App extends Vue{
 		align-items: center;
 		display: flex;
 		justify-content: flex-start;
-		margin-left: 3rem;
+		margin-left: 6rem;
 
 		svg:hover{
-			color: var(--menubar-item-hover);
-		}
-
-		input{
-			display: none;
+			color: var(--button);
 		}
 	}
 
 	.profile-menu{
 		grid-area: profile;
-		display: flex;
+		display: flex;	
 		justify-content: flex-end;
     	align-items: center;
 
@@ -179,8 +202,13 @@ export default class App extends Vue{
 			display: flex;
     		flex-direction: row;
 			align-items: center;
+
+			h6:first-child{
+				margin-right: 10px!important;
+			}
+
 			h6{
-				margin-right: 25px;
+				margin-right: 75px;
 				font-size: 1.5rem;
 				margin-bottom: 0;
 			}

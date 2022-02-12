@@ -92,17 +92,17 @@ export default {
 
 .link:hover{
     // background-color: var(--menubar-item-hover);
-    color: var(--menubar-item-hover);
+    color: var(--button);
 }
 
 a.router-link-active{
     // border-bottom: 1px solid var(--menubar-item-active);
-    color: var(--menubar-item-active);
+    color: var(--button-active);
 }
 
 a.router-link-hover{
     // border: 1px solid var(--menubar-item-active);
-    color: var(--menubar-item-hover);
+    color: var(--button);
 }
 
 </style>
